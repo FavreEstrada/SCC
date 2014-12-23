@@ -1,4 +1,4 @@
-Proyecto
+SCC
 ========
 
-Prueba
+Testing
