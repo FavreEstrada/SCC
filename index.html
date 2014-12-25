@@ -1,15 +1,53 @@
 <html>
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Control de Clientes</title>
     <script type="text/javascript" src="libs/jquery.js" charset="utf-8"></script>
     <script type="text/javascript" src="libs/canJs.js" charset="utf-8"></script>
     <script type="text/javascript" src="libs/bootstrap.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="libs/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="views/css/scc.css">
 </head>
 
 <body>
-    <div id="navigation_bar"></div>
+    <div class="main-content">
+        <div class="img-container">
+            <img class="company-logo" src="Logo.jsp" alt="Logo" />
+            <p id="Eslogan"></p>
+        </div>
+        <h1 id="Titulo" class="title">Sistema de Control de Clientes</h1>
+        <div class='row-fluid'>
+            <div class="span12">
+                <div id="contenedor" class="login-form-container">
+                    <p id="Login">Login</p>
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Usuario" class="col-sm-2 control-label">Usuario</label>
+                            <div class="col-sm-2">
+                                <span class="add-on"><i class="icon-user"></i></span>
+                                <input type="email" class="form-control text-input input-medium user-input" id="user_input" placeholder="Nombre del Usuario">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Contraseña" class="col-sm-2 control-label">Contraseña</label>
+                            <div class="col-sm-2">
+                                <span class="add-on"><i class="icon-lock"></i></span>
+                                <input type="password" class="form-control user-password text-input input-medium" id="pass_input" placeholder="Contraseña">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-large btn-primary">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
