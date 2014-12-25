@@ -1,0 +1,67 @@
+/* 
+    Document   : General
+    Created on : May 15, 2013, 3:02:50 AM
+    Author     : Favré Estrada
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+p#titulo {
+    text-align: center;
+    font-weight: bold;
+    font-size:18px;	
+}
+p#Eslogan {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style:italic;
+}
+textarea{
+    height: 70px;
+    vertical-align: middle;
+}
+.Menu{
+    margin-left: 350px;
+}
+
+table#tabla{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#contenedor_ordenes{
+    overflow: scroll;
+    height: 400px;
+}
+div#contenedorforma{
+    border: 1px solid #999999;
+}
+
+div#Sesion {
+    text-align: right;
+    width: 99%;
+    font-size: 14px;
+}
+
+/* all */
+::-webkit-input-placeholder {
+    color: gray;
+    font-style: italic;
+}
+/* firefox 19+ */
+::-moz-placeholder {
+    color: gray;
+    font-style: italic;
+} 
+/* ie */
+:-ms-input-placeholder {
+    color: gray;
+    font-style: italic;
+} 
+input:-moz-placeholder { 
+    color: gray;
+    font-style: italic;
+}
