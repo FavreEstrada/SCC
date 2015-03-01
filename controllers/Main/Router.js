@@ -1,7 +1,6 @@
 (function(){
 	var Router = can.Control.extend({
 		'init': function(){
-			console.log("Cargo")
 		},
 		'route' : function(){
 			can.route.attr({
