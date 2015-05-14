@@ -11,37 +11,20 @@ module.exports = function(grunt) {
       },
       basic_and_extras: {
         files: {
-          'app.js': ['assets/js/controllers/{,*/}*.js', 'assets/js/models/{,*/}*.js', 'assets/js/helpers/{,*/}*.js', 'assets/js/components/{,*/}*.js','assets/js/lang/{,*/}*.js'],
-          'libs.js': [
-            'assets/libs/jquery1.10.2.js',
-            'assets/libs/can.custom.js',
-            'assets/libs/d3.v2.js',
-            'assets/libs/d3pie.min.js',
-            'assets/libs/sap.viz.javafx.patch.js',
-            'assets/libs/masonry.pkgd.min.js',
-            'assets/libs/toasterNotifs.js',
-            'assets/libs/moment.js',
-            'assets/libs/json2.js',
-            'assets/libs/canvg.js',
-            'assets/libs/rgbcolor.js',
-            'assets/libs/intro.min.js',
-            'assets/libs/sap.viz.js',
-            'assets/libs/jquery-ui.min.js',
-            'assets/libs/bootstrap.min.js',
-            'assets/libs/bootstrap-select.min.js',
-            'assets/libs/tag-it.custom.js',
-            'assets/libs/html2canvas.js',
-            'assets/libs/jspdf.js',
-            'assets/libs/jspdf.plugin.addimage.js',
-            'assets/libs/Blob.js',
-            'assets/libs/canvas-to-blob.min.js',
-            'assets/libs/FileSaver.js',
-            'assets/libs/daterangepicker.js',
-            'assets/libs/iscroll.js',
-            'assets/libs/jquery.Jcrop.min.js',
-            'assets/libs/faye-browser-min.js'
+          'app.js': ['controllers/{,*/}*.js',
+            //'assets/js/models/{,*/}*.js',
+            //'assets/js/helpers/{,*/}*.js',
+            //'assets/js/components/{,*/}*.js',
+            //'assets/js/lang/{,*/}*.js'
           ],
-          'cvon-templates.js': ['assets/js/cvon-templates/*.js']
+          'libs.js': [
+            'libs/jquery.js',
+            'libs/angular.min.js',
+            'libs/bootstrap.js',
+            'libs/less.js',
+
+          ],
+          //'cvon-templates.js': ['assets/js/cvon-templates/*.js']
         },
       },
     },
@@ -58,8 +41,8 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['assets/js/controllers/{,*/}*.js',
-        'assets/js/models/{,*/}*.js', 'assets/js/components/{,*/}*.js'
+      files: ['controllers/{,*/}*.js',
+        //'assets/js/models/{,*/}*.js', 'assets/js/components/{,*/}*.js'
       ],
       options: {
         curly: true,
@@ -80,7 +63,12 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['assets/js/components/{,*/}*.js', 'assets/js/controllers/{,*/}*.js', 'assets/js/models/{,*/}*.js', 'assets/js/helpers/{,*/}*.js', 'assets/libs/{,*/}*.js'],
+        files: ['controllers/{,*/}*.js',
+          //'assets/js/components/{,*/}*.js',
+          //'assets/js/models/{,*/}*.js',
+          //'assets/js/helpers/{,*/}*.js',
+          'libs/{,*/}*.js'
+        ],
         tasks: ['concat'],
         options: {
           spawn: false,
