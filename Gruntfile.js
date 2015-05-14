@@ -11,17 +11,18 @@ module.exports = function(grunt) {
       },
       basic_and_extras: {
         files: {
-          'app.js': ['controllers/{,*/}*.js',
+          'app.js': ['app/{,**/}*.js',
             //'assets/js/models/{,*/}*.js',
             //'assets/js/helpers/{,*/}*.js',
             //'assets/js/components/{,*/}*.js',
             //'assets/js/lang/{,*/}*.js'
           ],
           'libs.js': [
-            'libs/jquery.js',
-            'libs/angular.min.js',
-            'libs/bootstrap.js',
-            'libs/less.js',
+            'assets/libs/jquery.js',
+            'assets/libs/angular.min.js',
+            'assets/libs/angular-route.min.js',
+            'assets/libs/bootstrap.js',
+            'assets/libs/less.js',
 
           ],
           //'cvon-templates.js': ['assets/js/cvon-templates/*.js']
@@ -41,7 +42,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['controllers/{,*/}*.js',
+      files: ['app/{,*/}*.js',
         //'assets/js/models/{,*/}*.js', 'assets/js/components/{,*/}*.js'
       ],
       options: {
@@ -63,11 +64,11 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['controllers/{,*/}*.js',
+        files: ['app/{,*/}*.js',
           //'assets/js/components/{,*/}*.js',
           //'assets/js/models/{,*/}*.js',
           //'assets/js/helpers/{,*/}*.js',
-          'libs/{,*/}*.js'
+          'assets/libs/{,*/}*.js'
         ],
         tasks: ['concat'],
         options: {

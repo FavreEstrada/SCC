@@ -3,56 +3,52 @@
 	dir.directive('menu', function($timeout) {
 		return {
 			restrict: "E",
-			templateUrl: "views/Main/Menu.html",
+			templateUrl: "app/components/directives/Menu.html",
 			controller: function() {
 				var self = this;
-
 				self.menu = {
 					left: [{
 						name: "Clientes",
 						options: [{
 							name: "Crear Cliente",
-							link: "#"
+							link: "#/crearCliente"
 						}, {
 							name: "Busqueda de Clientes",
-							link: "#"
+							link: "#/clientes"
 						}, {
 							name: "Crear Solicitud Rechazada",
-							link: "#"
+							link: "#/crearSolicitud"
 						}]
 					}, {
 						name: "Cobros",
 						options: [{
 							name: "Lista de Cobros",
-							link: "#"
+							link: "#/cobros"
 						}]
 					}, {
 						name: "Reportes",
 						options: [{
 							name: "DashBoards",
-							link: "#"
+							link: "#/dashboards"
 						}, {
 							name: "Lista de Clientes",
-							link: "#"
+							link: "#/clientes"
 						}, {
 							name: "Solicitudes Rechazadas",
-							link: "#"
+							link: "#/solicitudes"
 						}, {
 							name: "Órdenes",
-							link: "#"
+							link: "#/ordenes"
 						}]
 					}, {
 						name: "Parametrización",
-						options: []
+						options: [],
+						link: "#/configuracion"
 					}]
 				};
 				$timeout(function() {
-					$('.submenu').hover(function() {
-						$(this).children('ul').show();
-					}, function() {
-						$(this).children('ul').hide();
-					}).find("a:first").append(" &raquo; ");
 					$('.dropdown-toggle').dropdown();
+					$(".no-menu").removeAttr("data-toggle");
 				});
 
 			},

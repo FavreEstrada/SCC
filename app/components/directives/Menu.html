@@ -3,8 +3,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown" ng-repeat="option in menuCtrl.menu.left"><a data-toggle="dropdown" class="dropdown-toggle" href="#">{{option.name}}<b ng-class="{'caret' : option.options.length !== 0}"></b></a>
-                <ul class="dropdown-menu" role="menu" ng-hide="option.options.length === 0">
+                <li class="dropdown" ng-repeat="option in menuCtrl.menu.left"><a data-toggle="dropdown" ng-class="option.options.length !== 0 ? 'dropdown-toggle' : 'no-menu'" href="{{window.location.pathname + option.link}}">{{option.name}}<b ng-class="{'caret' : option.options.length !== 0}"></b></a>
+                <ul class="dropdown-menu" role="menu" ng-if="option.options.length !== 0">
                     <li ng-repeat="subLevel in option.options"><a href="{{subLevel.link}}">{{subLevel.name}}</a></li>
                 </ul>
             </li>

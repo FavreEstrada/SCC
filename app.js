@@ -8,56 +8,52 @@ var ctrls = angular.module('SCC.controllers',[]);
 	dir.directive('menu', function($timeout) {
 		return {
 			restrict: "E",
-			templateUrl: "views/Main/Menu.html",
+			templateUrl: "app/components/directives/Menu.html",
 			controller: function() {
 				var self = this;
-
 				self.menu = {
 					left: [{
 						name: "Clientes",
 						options: [{
 							name: "Crear Cliente",
-							link: "#"
+							link: "#/crearCliente"
 						}, {
 							name: "Busqueda de Clientes",
-							link: "#"
+							link: "#/clientes"
 						}, {
 							name: "Crear Solicitud Rechazada",
-							link: "#"
+							link: "#/crearSolicitud"
 						}]
 					}, {
 						name: "Cobros",
 						options: [{
 							name: "Lista de Cobros",
-							link: "#"
+							link: "#/cobros"
 						}]
 					}, {
 						name: "Reportes",
 						options: [{
 							name: "DashBoards",
-							link: "#"
+							link: "#/dashboards"
 						}, {
 							name: "Lista de Clientes",
-							link: "#"
+							link: "#/clientes"
 						}, {
 							name: "Solicitudes Rechazadas",
-							link: "#"
+							link: "#/solicitudes"
 						}, {
 							name: "Órdenes",
-							link: "#"
+							link: "#/ordenes"
 						}]
 					}, {
 						name: "Parametrización",
-						options: []
+						options: [],
+						link: "#/configuracion"
 					}]
 				};
 				$timeout(function() {
-					$('.submenu').hover(function() {
-						$(this).children('ul').show();
-					}, function() {
-						$(this).children('ul').hide();
-					}).find("a:first").append(" &raquo; ");
 					$('.dropdown-toggle').dropdown();
+					$(".no-menu").removeAttr("data-toggle");
 				});
 
 			},
@@ -65,15 +61,18 @@ var ctrls = angular.module('SCC.controllers',[]);
 		};
 	});
 }(this));;(function() {
-	var app = angular.module('SCC', [/*'ngRoute',*/ 'SCC.controllers','SCC.directives']);
-	// app.config(['$routeProvider', function($routeProvider) {
-	// 	$routeProvider.when('/page1', {
-	// 		templateUrl: 'partials/page1.html',
-	// 		controller: 'page1Controller'
-	// 	});
-
-	// 	$routeProvider.otherwise({
-	// 		redirectTo: '/page1'
-	// 	});
-	// }]);
+	var app = angular.module('SCC', ['ngRoute', 'SCC.controllers', 'SCC.directives']);
+	app.config(['$routeProvider', function($routeProvider) {
+		$routeProvider.when('/menu', {
+			templateUrl: 'app/components/directives/menu.html',
+			controller: 'menuCtrl'
+		});
+		$routeProvider.when('/crearCliente', {
+			templateUrl: 'menu.html',
+			controller: 'menuCtrl'
+		});
+		$routeProvider.otherwise({
+			redirectTo: 'principal'
+		});
+	}]);
 }(this));
