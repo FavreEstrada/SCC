@@ -42,7 +42,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['app/{,*/}*.js',
+      files: ['app/{,**/}*.js',
         //'assets/js/models/{,*/}*.js', 'assets/js/components/{,*/}*.js'
       ],
       options: {
@@ -64,11 +64,11 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['app/{,*/}*.js',
+        files: ['app/{,**/}*.js',
           //'assets/js/components/{,*/}*.js',
           //'assets/js/models/{,*/}*.js',
           //'assets/js/helpers/{,*/}*.js',
-          'assets/libs/{,*/}*.js'
+          'assets/libs/{,**/}*.js'
         ],
         tasks: ['concat'],
         options: {

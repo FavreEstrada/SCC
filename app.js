@@ -1,7 +1,41 @@
-(function(){
-var ctrls = angular.module('SCC.controllers',[]);
+(function() {
+	var ctrls = angular.module('SCC.controllers', []);
 	ctrls.controller('mainCtrl', function($scope) {
 		var self = this;
+	});
+	ctrls.controller('crearClienteCtrl', function($scope) {
+		var self = this;
+		self.personeria = ["Natural", "Juridica"];
+		self.tipoPer = "Natural";
+		self.idsArray = [{
+			name: "Identidad",
+			type: "Natural"
+		}, {
+			name: "Pasaporte",
+			type: "Natural"
+		}, {
+			name: "RTN",
+			type: "Juridica"
+		}];
+		self.costumer = {
+			first_name: "",
+			second_name: "",
+			first_last: "",
+			second_last: "",
+			personeria: self.tipoPer,
+			id: "",
+			status: 1,
+			service: "Tv",
+			extens: 0,
+			bar: "",
+			tel: "",
+			email: "",
+			dir: "",
+			obs: ""
+		};
+		self.validateForm = function() {
+			console.log("validar");
+		};
 	});
 }(this));;(function() {
 	var dir = angular.module('SCC.directives', []);
@@ -63,16 +97,13 @@ var ctrls = angular.module('SCC.controllers',[]);
 }(this));;(function() {
 	var app = angular.module('SCC', ['ngRoute', 'SCC.controllers', 'SCC.directives']);
 	app.config(['$routeProvider', function($routeProvider) {
-		$routeProvider.when('/menu', {
-			templateUrl: 'app/components/directives/menu.html',
-			controller: 'menuCtrl'
-		});
 		$routeProvider.when('/crearCliente', {
-			templateUrl: 'menu.html',
-			controller: 'menuCtrl'
+			templateUrl: 'app/components/controllers/CrearCliente.html',
+			controller: 'crearClienteCtrl',
+			controllerAs: "client"
 		});
 		$routeProvider.otherwise({
-			redirectTo: 'principal'
+			redirectTo: '/menu'
 		});
 	}]);
 }(this));

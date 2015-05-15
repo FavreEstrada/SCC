@@ -1,16 +1,13 @@
 (function() {
 	var app = angular.module('SCC', ['ngRoute', 'SCC.controllers', 'SCC.directives']);
 	app.config(['$routeProvider', function($routeProvider) {
-		$routeProvider.when('/menu', {
-			templateUrl: 'app/components/directives/menu.html',
-			controller: 'menuCtrl'
-		});
 		$routeProvider.when('/crearCliente', {
-			templateUrl: 'menu.html',
-			controller: 'menuCtrl'
+			templateUrl: 'app/components/controllers/CrearCliente.html',
+			controller: 'crearClienteCtrl',
+			controllerAs: "client"
 		});
 		$routeProvider.otherwise({
-			redirectTo: 'principal'
+			redirectTo: '/menu'
 		});
 	}]);
 }(this));
