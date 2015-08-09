@@ -6,6 +6,11 @@
 			controller: 'crearClienteCtrl',
 			controllerAs: "client"
 		});
+		$routeProvider.when('/clientes', {
+			templateUrl: 'app/components/controllers/ListaClientes.html',
+			controller: 'listaClienteCtrl',
+			controllerAs: "listClients"
+		});
 		$routeProvider.otherwise({
 			redirectTo: '/menu'
 		});

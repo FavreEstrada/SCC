@@ -9,16 +9,19 @@
 				self.menu = {
 					left: [{
 						name: "Clientes",
-						options: [{
-							name: "Crear Cliente",
-							link: "#/crearCliente"
-						}, {
-							name: "Busqueda de Clientes",
-							link: "#/clientes"
-						}, {
-							name: "Crear Solicitud Rechazada",
-							link: "#/crearSolicitud"
-						}]
+						options: [
+							/*{
+														name: "Crear Cliente",
+														link: "#/crearCliente"
+													},  */
+							{
+								name: "Lista de Clientes",
+								link: "#/clientes"
+							}, {
+								name: "Crear Solicitud Rechazada",
+								link: "#/crearSolicitud"
+							}
+						]
 					}, {
 						name: "Cobros",
 						options: [{
@@ -30,9 +33,6 @@
 						options: [{
 							name: "DashBoards",
 							link: "#/dashboards"
-						}, {
-							name: "Lista de Clientes",
-							link: "#/clientes"
 						}, {
 							name: "Solicitudes Rechazadas",
 							link: "#/solicitudes"
@@ -53,6 +53,17 @@
 
 			},
 			controllerAs: "menuCtrl"
+		};
+	});
+	dir.directive('detalleCliente', function() {
+		return {
+			restrict: "E",
+			scope: true,
+			controller: function($scope) {
+				var self = this;
+			},
+			controllerAs: "detailsCtrl",
+			templateUrl: "app/components/directives/DetalleCliente.html"
 		};
 	});
 }(this));

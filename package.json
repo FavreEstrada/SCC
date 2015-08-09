@@ -1,21 +1,25 @@
 {
-  "name": "SCC",
-  "description": "Sistema de Control de Clientes",
+  "name": "scc",
+  "version": "1.0.0",
+  "description": "SCC Sistema de Control de Clientes",
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:FavreEstrada/SCC.git"
+    "url": "git+https://github.com/FavreEstrada/SCC.git"
   },
-  "author": "Favré Estrada",
-  "license": "BSD-2-Clause",
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-connect": "~0.5.0",
     "grunt-contrib-jshint": "~0.5.0",
     "grunt-contrib-watch": "~0.5.0",
-     "grunt-contrib-uglify": "~0.5.0",
-    "time-grunt" : "~1.0.0"
+    "grunt-contrib-uglify": "~0.5.0",
+    "time-grunt": "~1.0.0"
   },
-  "private" : true
+  "bugs": {
+    "url": "https://github.com/FavreEstrada/SCC/issues"
+  },
+  "homepage": "https://github.com/FavreEstrada/SCC#readme"
 }
