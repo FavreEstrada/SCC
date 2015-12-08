@@ -5,3 +5,7 @@
 *.war
 *.ear
 node_modules/
+bower_components/
+app.js
+libs.js
+appCSS.css
