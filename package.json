@@ -2,7 +2,11 @@
   "name": "scc",
   "version": "1.0.0",
   "description": "SCC Sistema de Control de Clientes",
+    "authors": [
+    "Favre Estrada"
+  ],
   "main": "app.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FavreEstrada/SCC.git"
@@ -16,6 +20,7 @@
     "grunt-contrib-jshint": "~0.5.0",
     "grunt-contrib-watch": "~0.5.0",
     "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-less": "^1.0.1",
     "time-grunt": "~1.0.0"
   },
   "bugs": {

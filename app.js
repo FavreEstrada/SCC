@@ -133,7 +133,8 @@
 			$("#clientDetail").modal('show');
 		};
 	});
-}(this));;(function() {
+}(this));
+(function() {
 	var dir = angular.module('SCC.directives', []);
 	dir.directive('menu', function($timeout) {
 		return {
@@ -201,21 +202,4 @@
 			templateUrl: "app/components/directives/DetalleCliente.html"
 		};
 	});
-}(this));;(function() {
-	var app = angular.module('SCC', ['ngRoute', 'SCC.controllers', 'SCC.directives']);
-	app.config(['$routeProvider', function($routeProvider) {
-		$routeProvider.when('/crearCliente', {
-			templateUrl: 'app/components/controllers/CrearCliente.html',
-			controller: 'crearClienteCtrl',
-			controllerAs: "client"
-		});
-		$routeProvider.when('/clientes', {
-			templateUrl: 'app/components/controllers/ListaClientes.html',
-			controller: 'listaClienteCtrl',
-			controllerAs: "listClients"
-		});
-		$routeProvider.otherwise({
-			redirectTo: '/menu'
-		});
-	}]);
 }(this));

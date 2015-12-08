@@ -1,0 +1,29 @@
+{
+  "name": "SCC",
+  "version": "1.0.0",
+  "authors": [
+    "Favre Estrada"
+  ],
+  "description": "Sistema de Control de Clientes",
+  "main": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib/bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "d3": "~3.5.6",
+    "bootstrap": "~3.3.5",
+    "modernizr": "~2.8.3",
+    "components-font-awesome": "~4.4.0",
+    "angular": "~1.4.5",
+    "angular-route": "~1.4.3",
+    "angular-cookies": "~1.4.0",
+    "angular-bootstrap": "~0.13.3",
+    "angular-md5": "~0.1.8",
+    "angular-route-styles": "*"
+  }
+}
