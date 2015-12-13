@@ -1,0 +1,12 @@
+.clientList-Cont form.edit-client > div {
+  margin: 10px 0 10px 0;
+}
+.clientList-Cont form.edit-client .inline {
+  display: inline-block;
+}
+.clientList-Cont .modal-dialog {
+  width: 750px;
+}
+.clientList-Cont .modal-dialog .modal-body {
+  height: 500px;
+}

@@ -1,0 +1,32 @@
+.main-content .title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.main-content .img-container {
+  text-align: center;
+}
+.main-content .img-container .company-logo {
+  width: 217px;
+  height: 89px;
+}
+.main-content .header .menu {
+  padding-left: 0;
+}
+.main-content .header .navbar .dropdown .dropdown-menu .submenu-show {
+  left: 100%;
+  top: 0px;
+}
+.main-content .content {
+  padding-top: 20px;
+  padding-left: 20px;
+  background: none repeat scroll 0% 0% #f9f9f9;
+}
+.main-content .content form.create-client > div {
+  margin: 10px 0 10px 0;
+}
+.main-content .posLeft {
+  text-align: right;
+}
+.main-content .inline {
+  display: inline-block;
+}

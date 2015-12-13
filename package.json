@@ -2,16 +2,13 @@
   "name": "scc",
   "version": "1.0.0",
   "description": "SCC Sistema de Control de Clientes",
-    "authors": [
-    "Favre Estrada"
-  ],
   "main": "app.js",
   "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FavreEstrada/SCC.git"
   },
-  "author": "",
+  "author": "Favré Estrada",
   "license": "ISC",
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -26,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/FavreEstrada/SCC/issues"
   },
-  "homepage": "https://github.com/FavreEstrada/SCC#readme"
+  "homepage": "https://github.com/FavreEstrada/SCC#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "pg": "^4.4.3"
+  }
 }

@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '.',
-          src: ['app/components/directives/{,*/}*.less', 'app/css/{,*}*.less', 'app/login.less'],
+          src: ['app/directives/{,*/}*.less', 'app/css/{,*}*.less', 'app/login.less'],
           dest: '.',
           ext: '.css'
         }]
@@ -22,25 +22,22 @@ module.exports = function(grunt) {
           separator: '\n'
         },
         files: {
-          'app.js': ['app/config.js', 'app/models/{,*/}*.js', 'app/services/{,*/}*.js', 'app/components/filters/{,*/}*.js', 'app/components/controllers/{,*/}*.js', 'app/components/directives/{,*/}*.js', 'app/factories/{,*/}*.js'],
+          'app.js': ['app/shared/router_ctrl.js', 'app/models/{,*/}*.js', 'app/services/{,*/}*.js', 'app/filters/{,*/}*.js', 'app/controllers/{,*/}*.js', 'app/directives/{,*/}*.js', 'app/factories/{,*/}*.js'],
           'libs.js': [
-            'lib/bower_components/jquery/dist/jquery.min.js',
-            'lib/bower_components/angular/angular.min.js',
-            'lib/bower_components/angular-route/angular-route.min.js',
-            'lib/bower_components/angular-cookies/angular-cookies.js',
-            'lib/bower_components/angular-md5/angular-md5.min.js',
-            'lib/bower_components/angular-route-styles/route-styles.js',
-            'lib/bower_components/d3/d3.min.js',
-            'lib/bower_components/underscore/underscore-min.js',
-            'lib/bower_components/underscore.string/dist/underscore.string.js',
-            'lib/bower_components/bootstrap/dist/js/bootstrap.min.js',
-            'lib/bower_components/angular-bootstrap/ui-bootstrap.min.js',
-            'lib/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+            'lib/jquery/dist/jquery.min.js',
+            'lib/angular/angular.min.js',
+            'lib/angular-route/angular-route.min.js',
+            'lib/angular-cookies/angular-cookies.js',
+            'lib/angular-route-styles/route-styles.js',
+            'lib/d3/d3.min.js',
+            'lib/bootstrap/dist/js/bootstrap.min.js',
+            'lib/angular-bootstrap/ui-bootstrap.min.js',
+            'lib/angular-bootstrap/ui-bootstrap-tpls.min.js'
           ]
         }
       },
       css: {
-        src: ['app/css/{,*/}*.css', 'app/components/directives/{,*/}*.css'],
+        src: ['app/css/{,*/}*.css', 'app/directives/{,*/}*.css'],
         dest: 'appCSS.css'
       }
     },
@@ -60,7 +57,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       files: ['app/{,**/}*.js',
-        //'assets/js/models/{,*/}*.js', 'assets/js/components/{,*/}*.js'
+        //'assets/js/models/{,*/}*.js', 'assets/js/{,*/}*.js'
       ],
       options: {
         curly: true,
@@ -91,19 +88,19 @@ module.exports = function(grunt) {
       },
       css: {
         files: [
-          'app/css/{,*}*.css', 'app/components/directives/{,*/}*.css', 'app/login.css'
+          'app/css/{,*}*.css', 'app/directives/{,*/}*.css', 'app/login.css'
         ],
         tasks: ['concat:css']
       },
       sass: {
         files: [
-          'app/css/{,*}*.scss', 'app/components/directives/{,*/}*.scss'
+          'app/css/{,*}*.scss', 'app/directives/{,*/}*.scss'
         ],
         tasks: ['sass', 'concat:css']
       },
       less: {
         files: [
-          'app/css/{,*}*.less', 'app/components/directives/{,*/}*.less', 'app/login.less'
+          'app/css/{,*}*.less', 'app/directives/{,*/}*.less', 'app/login.less'
         ],
         tasks: ['less', 'concat:css']
       },

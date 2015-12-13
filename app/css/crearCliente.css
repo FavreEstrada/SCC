@@ -1,0 +1,9 @@
+.create-client form > div {
+  margin-bottom: 20px;
+}
+.create-client form .cont-buttons {
+  text-align: center;
+}
+.create-client .cont-buttons {
+  text-align: center;
+}

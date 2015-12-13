@@ -1,0 +1,45 @@
+@padding: 20px;
+.main-content {
+    .title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .img-container {
+        text-align: center;
+
+        .company-logo {
+            width: 217px;
+            height: 89px;
+        }
+    }
+    .header {
+        .menu {
+            padding-left: 0;
+        }
+        .navbar {
+            .dropdown {
+                .dropdown-menu .submenu-show {
+                    left: 100%;
+                    top: 0px;
+                }
+            }
+        }
+    }
+    .content {
+        padding-top: @padding;
+        padding-left: @padding;
+        background: none repeat scroll 0% 0% rgb(249, 249, 249);
+
+        form.create-client {
+            > div {
+                margin: 10px 0 10px 0;
+            }
+        }
+    }
+    .posLeft {
+        text-align: right;
+    }
+    .inline {
+        display: inline-block;
+    }
+}

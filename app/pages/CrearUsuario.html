@@ -1,0 +1,42 @@
+<h3>Crear Nuevo Usuario</h3>
+<div >
+    <form class="create-client" onsubmit="">
+        <div >
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <label>Nombre de Usuario:</label>
+                <div class="input-prepend inline">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input type="text" name="nombre_usuario" value="" class="validate[required] text-input input-medium" maxlength="20" placeholder="Nombre del Usuario" />
+                </div>
+            </div>
+            <div class="col-lgl-6 col-md-6 col-sm-6">
+                <label>Tipo de Usuario:</label>
+                <div class="input-prepend inline">
+                    <span class="add-on"><i class="icon-list"></i></span>
+                    <select name="tipo_usuario" class="input-medium">
+                    </select>
+                </div>
+            </div>
+            <label>Contraseña:</label>
+            <div class="input-prepend inline">
+                <span class="add-on"><i class="icon-lock"></i></span>
+                <input type="password" name="password_usuario" value="" class="validate[required] text-input input-medium" placeholder="Contraseña"></input>
+            </div>
+            <input name="btn_crear" class="btn btn-primary" type="submit" value="Guardar"></input>
+            <button type="reset" class="btn">Cancelar</button>
+        </div>
+    </form>
+    <h3>Usuarios Existentes</h3>
+    <table class="tableWithFloatingHeader">
+        <thead>
+            <tr>
+                <th>Nombre del Usuario</th>
+                <th>Tipo de Usuario</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
