@@ -1,0 +1,67 @@
+.listaCobro-cont .radio-container {
+  display: inline-block;
+  margin-left: 10px;
+}
+.listaCobro-cont .table-container table.cobros-table > thead > tr > th {
+  font-weight: normal;
+  border: 1px solid $tableBorderColor;
+  background-color: $tableHeadColor;
+  height: 60px;
+  padding: 0px 10px 0px 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.listaCobro-cont .table-container table.cobros-table > thead > tr > th:first-child {
+  border-left: none;
+}
+.listaCobro-cont .table-container table.cobros-table > thead > tr > th:last-child {
+  border-right: none;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr.expansibleRow {
+  cursor: pointer;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td {
+  border: 1px solid $tableBorderColor;
+  padding: 20px 10px 20px 10px;
+  text-align: center;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData {
+  padding: 0px;
+  border: none !important;
+  background-color: #F5F5F5;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table {
+  width: 100%;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead {
+  background-color: #ECECEC;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th {
+  font-weight: normal;
+  border-right: 2px solid $tableBorderColor;
+  border-bottom: 2px solid $tableBorderColor;
+  border-left: 2px solid $tableBorderColor;
+  text-align: center;
+  padding: 10px;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th.wi-column {
+  background-color: $color;
+  color: white;
+  display: none;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th:first-child {
+  border-left: 1px solid $tableBorderColor;
+  border-top: 1px solid $tableBorderColor;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th:last-child {
+  border-right: none;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > tbody > tr > td {
+  border-right: 2px solid $tableBorderColor;
+  border-left: 1px solid $tableBorderColor;
+  text-align: center;
+  padding: 10px;
+}
+.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > tbody > tr > td > a {
+  cursor: pointer;
+}

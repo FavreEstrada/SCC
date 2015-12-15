@@ -18,7 +18,7 @@
 }
 .main-content .content {
   padding-top: 20px;
-  padding-left: 20px;
+  padding-left: calc(25px);
   background: none repeat scroll 0% 0% #f9f9f9;
 }
 .main-content .content form.create-client > div {
@@ -29,4 +29,12 @@
 }
 .main-content .inline {
   display: inline-block;
+}
+.main-content .modal .modal-body {
+  height: 500px;
+}
+@media (min-width: 992px) {
+  .modal .modal-dialog {
+    width: 1080px;
+  }
 }

@@ -1,0 +1,90 @@
+<div class="listaCobro-cont col-lg-12 col-md-12 col-sm-12">
+  <h4>Lista de Cobro</h4>
+  <div class="col-lg-6 col-md-6 col-sm-6 search-Cont">
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="Buscar Cliente">Buscar Cliente: </label>
+        <div class="input-group">
+          <div class="input-group-addon"> <span class="add-on"><i class="glyphicon glyphicon-user"></i></span></div>
+          <input type="text" class="form-control" id="search_box" placeholder="(Nombre, Apellido, etc)" ng-model="searchWord">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+    <label>Ver por:</label>
+    <div class="radio-container">
+      <label class="radio-inline">
+        <input type="radio" name="clientOptions" id="cliente_natural" value="1" ng-model="seeFilter" ng-checked="true" ng-change="seeBy()" >Cliente Natural
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="clientOptions" id="cliente_juridico" value="2" ng-model="seeFilter" ng-change="seeBy()"> Cliente Jurídico
+      </label>
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="table table-striped table-hover cobros-table">
+      <thead>
+        <tr>
+          <th ng-repeat="(key, value) in table.header" ng:class="selectedCls(key)" ng-click="changeSorting(key)">{{value}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr index="{{table.body.indexOf(obj)}}" ng-show="!isLoadingTable" ng-repeat-start="(key,obj) in table.body | orderBy:sort.column:sort.descending | filter: searchWord" ng-click="seeDetails(obj)">
+          <td ng-repeat=" data in obj.row">{{data}}</td>
+        </tr>
+        <tr class="expandedDataRow" ng-repeat-end>
+          <td ng-show="obj.showExpandedData"><!-- dummy column  to create blank space for subtable--></td>
+          <td ng-show="obj.showExpandedData" class="expandedData" colspan="{{getHeaderSize()}}">
+            <table class="expandedDataTable" id="expandedDataTable{{$index}}">
+              <thead>
+                <tr>
+                  <th ng-repeat="col in table.expandedTable.header">{{col}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr ng-hide="obj.isLoadingExpandedData" ng-repeat="expandedRowData in obj.expandedRow"> -->
+                   <tr ng-repeat="expandedRowData in obj.expandedRow">
+                  <td ng-repeat="(key, value) in expandedRowData track by $index">
+                    {{value}}
+                  </td>
+                </tr>
+                <!-- <tr ng-show="obj.isLoadingExpandedData">
+                  <td colspan="{{selectedFilter.expandedColumnNames.length}}">
+                    <csc-load-icon></csc-load-icon>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr ng-show="isLoadingTable">
+          <td colspan="{{getHeaderSize()}}">
+            <csc-load-icon></csc-load-icon>
+          </td>
+          <tr ng-show="!isLoadingTable && (results.length === 0 || table.body.length === 0)">
+            <td colspan="{{getHeaderSize()}}">No data results</td>
+          </tr>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="clientDetail" tabindex="-1" role="dialog" aria-labelledby="Modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Detalle de Factura: {{modalTitle}}</h4>
+        </div>
+        <div class="modal-body" >
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

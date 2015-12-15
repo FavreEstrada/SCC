@@ -1,0 +1,6 @@
+.detalle-cliente form > div {
+  margin: 10px 0 10px 0;
+}
+.detalle-cliente form .name .input-group-addon {
+  width: 1%;
+}

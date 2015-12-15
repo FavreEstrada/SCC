@@ -1,0 +1,95 @@
+.listaCobro-cont {
+	.radio-container {
+		display: inline-block;
+		margin-left: 10px;
+	}
+	.table-container {
+		& table {
+			&.cobros-table {
+				& > thead {
+					& > tr {
+						& > th {
+							font-weight: normal;
+							border: 1px solid $tableBorderColor;
+							background-color: $tableHeadColor;
+							height: 60px;
+							padding: 0px 10px 0px 10px;
+							text-align: center;
+							cursor: pointer;
+						}
+						& > th:first-child {
+							border-left: none;
+						}
+						& > th:last-child {
+							border-right: none;
+						}
+					}
+				}
+				& > tbody {
+					& > tr {
+						&.expansibleRow {
+							cursor: pointer;
+						}
+						& > td {
+							border: 1px solid $tableBorderColor;
+							padding: 20px 10px 20px 10px;
+							text-align: center;
+
+							&.expandedData {
+								padding: 0px;
+								border: none !important;
+								background-color: #F5F5F5;
+
+								& > table {
+									width: 100%;
+
+									& > thead {
+										background-color: #ECECEC;
+
+										& > tr {
+											& > th {
+												font-weight: normal;
+												border-right: 2px solid $tableBorderColor;
+												border-bottom: 2px solid $tableBorderColor;
+												border-left: 2px solid $tableBorderColor;
+												text-align: center;
+												padding: 10px;
+
+												&.wi-column {
+													background-color: $color;
+													color: white;
+													display: none;
+												}
+											}
+											& > th:first-child {
+												border-left: 1px solid $tableBorderColor;
+												border-top: 1px solid $tableBorderColor;
+											}
+											& > th:last-child {
+												border-right: none;
+											}
+										}
+									}
+									& > tbody {
+										& > tr {
+											& > td {
+												border-right: 2px solid $tableBorderColor;
+												border-left: 1px solid $tableBorderColor;
+												text-align: center;
+												padding: 10px;
+
+												& > a {
+													cursor: pointer;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

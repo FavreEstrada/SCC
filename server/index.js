@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var path = require('path');
 
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://ijfqlprdyhfter:ZZOG0T8xbY77ETzZir17_4DG99@ec2-54-83-59-110.compute-1.amazonaws.com:5432/ddot7aahefgjrp';
+var connectionString = process.env.DATABASE_URL || require(path.join(__dirname, '../', '../', 'config'));
 var client = new pg.Client(connectionString);
 client.connect();
 
