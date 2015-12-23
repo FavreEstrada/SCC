@@ -4,9 +4,10 @@
 }
 .listaCobro-cont .table-container table.cobros-table > thead > tr > th {
   font-weight: normal;
-  border: 1px solid $tableBorderColor;
-  background-color: $tableHeadColor;
-  height: 60px;
+  background-color: #337ab7;
+  color: white;
+  height: 50px;
+  vertical-align: middle;
   padding: 0px 10px 0px 10px;
   text-align: center;
   cursor: pointer;
@@ -17,11 +18,13 @@
 .listaCobro-cont .table-container table.cobros-table > thead > tr > th:last-child {
   border-right: none;
 }
+.listaCobro-cont .table-container table.cobros-table > tbody > tr {
+  cursor: pointer;
+}
 .listaCobro-cont .table-container table.cobros-table > tbody > tr.expansibleRow {
   cursor: pointer;
 }
 .listaCobro-cont .table-container table.cobros-table > tbody > tr > td {
-  border: 1px solid $tableBorderColor;
   padding: 20px 10px 20px 10px;
   text-align: center;
 }
@@ -38,30 +41,20 @@
 }
 .listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th {
   font-weight: normal;
-  border-right: 2px solid $tableBorderColor;
-  border-bottom: 2px solid $tableBorderColor;
-  border-left: 2px solid $tableBorderColor;
   text-align: center;
   padding: 10px;
-}
-.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th.wi-column {
-  background-color: $color;
-  color: white;
-  display: none;
-}
-.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th:first-child {
-  border-left: 1px solid $tableBorderColor;
-  border-top: 1px solid $tableBorderColor;
 }
 .listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > thead > tr > th:last-child {
   border-right: none;
 }
 .listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > tbody > tr > td {
-  border-right: 2px solid $tableBorderColor;
-  border-left: 1px solid $tableBorderColor;
   text-align: center;
   padding: 10px;
 }
-.listaCobro-cont .table-container table.cobros-table > tbody > tr > td.expandedData > table > tbody > tr > td > a {
-  cursor: pointer;
+.listaCobro-cont .modal .modal-body {
+  font-size: 1.15em;
+  height: 240px !important;
+}
+.listaCobro-cont .modal .modal-body .detalle-cobro > div {
+  margin: 10px 0 12px 0;
 }

@@ -1,3 +1,4 @@
+@tableHeadColor: #337ab7;
 
     .clientList-Cont {
         form.edit-client {
@@ -6,6 +7,15 @@
             }
             .inline {
                 display: inline-block;
+            }
+        }
+        .table{
+            thead{
+                th{
+                    background: @tableHeadColor;
+                    color: white;
+                    font-weight: normal;
+                }
             }
         }
     }

@@ -4,3 +4,8 @@
 .clientList-Cont form.edit-client .inline {
   display: inline-block;
 }
+.clientList-Cont .table thead th {
+  background: #337ab7;
+  color: white;
+  font-weight: normal;
+}

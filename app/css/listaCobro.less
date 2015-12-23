@@ -1,3 +1,5 @@
+@tableHeadColor: #337ab7;
+
 .listaCobro-cont {
 	.radio-container {
 		display: inline-block;
@@ -10,9 +12,10 @@
 					& > tr {
 						& > th {
 							font-weight: normal;
-							border: 1px solid $tableBorderColor;
-							background-color: $tableHeadColor;
-							height: 60px;
+							background-color: @tableHeadColor;
+							color: white;
+							height: 50px;
+							vertical-align: middle;
 							padding: 0px 10px 0px 10px;
 							text-align: center;
 							cursor: pointer;
@@ -27,11 +30,11 @@
 				}
 				& > tbody {
 					& > tr {
+						cursor: pointer;
 						&.expansibleRow {
 							cursor: pointer;
 						}
 						& > td {
-							border: 1px solid $tableBorderColor;
 							padding: 20px 10px 20px 10px;
 							text-align: center;
 
@@ -49,21 +52,8 @@
 										& > tr {
 											& > th {
 												font-weight: normal;
-												border-right: 2px solid $tableBorderColor;
-												border-bottom: 2px solid $tableBorderColor;
-												border-left: 2px solid $tableBorderColor;
 												text-align: center;
 												padding: 10px;
-
-												&.wi-column {
-													background-color: $color;
-													color: white;
-													display: none;
-												}
-											}
-											& > th:first-child {
-												border-left: 1px solid $tableBorderColor;
-												border-top: 1px solid $tableBorderColor;
 											}
 											& > th:last-child {
 												border-right: none;
@@ -73,14 +63,8 @@
 									& > tbody {
 										& > tr {
 											& > td {
-												border-right: 2px solid $tableBorderColor;
-												border-left: 1px solid $tableBorderColor;
 												text-align: center;
 												padding: 10px;
-
-												& > a {
-													cursor: pointer;
-												}
 											}
 										}
 									}
@@ -88,6 +72,17 @@
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+	.modal {
+		.modal-body {
+			font-size: 1.15em;
+			height: 240px !important;
+			.detalle-cobro {
+				> div {
+					margin: 10px 0 12px 0;
 				}
 			}
 		}
