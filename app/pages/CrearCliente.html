@@ -1,21 +1,27 @@
 <div class="col-lg-12 col-md-12 col-sm-12 create-client">
-    <h4>Crear Cliente {{client.costumer.personeria}}</h4>
-    <form class="form-inline" name="createClient" novalidate ng-submit="client.validateForm()">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+    <h4>Crear Cliente {{customer.personeria.name}}</h4>
+    <form class="form-inline" name="createClient" novalidate ng-submit="addClient()">
+        <div class="col-lg-4 col-md-4 col-sm-4">
             <label>Tipo de Personería:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphglyphicon glyphicon-list"></i></span>
-                <select name="tipoper" ng-model="client.costumer.personeria" class="form-control">
-                    <option ng-repeat="personeria in client.personeria" ng-selected="{{personeria === client.tipoPer}}">{{personeria}}</option>
+                <select name="tipoper" ng-model="customer.personeria" class="form-control" ng-options="option as option.name for option in personeria track by option.id" ng-change="loadIDs()">
                 </select>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-4 col-sm-4">
             <label>Tipo de Identificación:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                <select name="tipoId" id="tipoid" class="form-control" ng-model="client.costumer.id">
-                    <option ng-repeat="id in client.idsArray" ng-if="id.type === client.costumer.personeria" >{{id.name}}</option>
+                <select name="tipoId" id="tipoid" class="form-control" ng-model="customer.id" ng-options="option as option.name for option in idsArray track by option.id">
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <label>No. de Identificación:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                    <input class="form-control" ng-model="customer.noID" name="no_identificacion"/>
                 </select>
             </div>
         </div>
@@ -23,81 +29,82 @@
         <div class="col-lg-4 col-md-4 col-sm-4">
             <label>Estado Gen. del Cliente:</label>
             <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-            <select class="form-control" name="estado_cliente" ng-model="client.costumer.status"></select>
+                <input class="form-control" name="estado_cliente" value="Activo" readonly="" />
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
         <label>Servicio:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-        <select class="form-control" name="servicio" ng-model="client.costumer.service"></select>
+        <select class="form-control" name="servicio" ng-model="customer.service"  ng-options="option as option.name for option in services track by option.id" ></select>
     </div>
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4">
     <label>Cant. Extensiones: </label>
-    <input class="form-inline" type="number" name="extensiones" ng-model="client.costumer.extens" value="0" min="0" />
+    <input class="form-control" type="number" name="extensiones" ng-model="customer.extens" value="0" min="0" />
 </div>
-<div class="col-lg-6 col-md-6 col-sm-6" ng-if="client.costumer.personeria === 'Natural'">
+<div class="col-lg-6 col-md-6 col-sm-6 required" ng-if="customer.personeria.name === 'Natural'">
     <label>Primer Nombre:</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input class="form-control" name="primer_nombre" placeholder="Primer Nombre" ng-model="client.costumer.first_name" type="text" ng-maxlength="20" required />
+        <input class="form-control" name="primer_nombre" placeholder="Primer Nombre" ng-model="customer.first_name" type="text" ng-maxlength="20" required />
     </div>
 </div>
-<div class="col-lg-6 col-md-6 col-sm-6" ng-if="client.costumer.personeria === 'Natural'">
+<div class="col-lg-6 col-md-6 col-sm-6" ng-if="customer.personeria.name === 'Natural'">
     <label>Segundo Nombre:</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input class="form-control" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="client.costumer.middle_name" type="text" value="" ng-maxlength="20"/>
+        <input class="form-control" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="customer.middle_name" type="text" value="" ng-maxlength="20"/>
     </div>
 </div>
-<div class="col-lg-6 col-md-6 col-sm-6" ng-if="client.costumer.personeria === 'Natural'">
+<div class="col-lg-6 col-md-6 col-sm-6 required" ng-if="customer.personeria.name === 'Natural'">
     <label>Primer Apellido:</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input class="form-control" name="primer_apellido" placeholder="Primer Apellido" ng-model="client.costumer.first_last" type="text" ng-maxlength="20" required/>
+        <input class="form-control" name="primer_apellido" placeholder="Primer Apellido" ng-model="customer.first_last" type="text" ng-maxlength="20" required/>
     </div>
 </div>
-<div class="col-lg-6 col-md-6 col-sm-6" ng-if="client.costumer.personeria === 'Natural'">
+<div class="col-lg-6 col-md-6 col-sm-6" ng-if="customer.personeria.name === 'Natural'">
     <label>Segundo Apellido:</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input class="form-control" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="client.costumer.second_last" type="text" ng-maxlength="20"/>
+        <input class="form-control" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="customer.second_last" type="text" ng-maxlength="20"/>
     </div>
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4">
     <label>Barrio o Colonia:</label>
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select class="form-control" name="barriocolonia" ng-model="client.costumer.bar" ></select>
+    <select class="form-control" name="barriocolonia" ng-model="customer.bar" ng-options="option as option.abbr for option in neighborhoods track by option.id" >
+    </select>
 </div>
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4">
 <label>Télefono:</label>
 <div class="input-group">
     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-    <input class="form-control" id="phone" placeholder="Teléfono" name="telefono" ng-model="client.costumer.tel" type="tel" value="" ng-maxlength="8" />
+    <input class="form-control" id="phone" placeholder="Teléfono" name="telefono" ng-model="customer.tel" type="tel" value="" ng-maxlength="8" />
 </div>
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4">
 <label>Email:</label>
 <div class="input-group">
     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-    <input class="form-control" name="email" placeholder="Email" ng-model="client.costumer.email" type="email" ng-maxlength="30"/>
+    <input class="form-control" name="email" placeholder="Email" ng-model="customer.email" type="email" ng-maxlength="30"/>
 </div>
 </div>
-<div class="col-lg-6 col-md-6 col-sm-6">
+<div class="col-lg-6 col-md-6 col-sm-6 required">
 <label>Dirección: </label>
-<textarea class="form-control inline" placeholder="Dirección"  name="direccion" ng-model="client.costumer.dir" ng-maxlength="100" required></textarea>
+<textarea class="form-control inline" placeholder="Dirección"  name="direccion" ng-model="customer.dir" ng-maxlength="100" required></textarea>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6">
 <label>Observaciones: </label>
-<textarea class="form-control inline"  name="observaciones" placeholder="Observaciones" ng-model="client.costumer.obs" ng-maxlength="45"></textarea>
+<textarea class="form-control inline"  name="observaciones" placeholder="Observaciones" ng-model="customer.obs" ng-maxlength="45"></textarea>
 </div>
 <div class="col-lg-12  col-md-12 col-sm-12 cont-buttons">
-<input type="submit" class="btn btn-primary" ng-disabled="createClient.user.$dirty && createClient.user.$invalid" value="Crear"></input>
-<button class="btn" ng-click="client.onCancel()">Cancelar</button>
+<input type="submit" class="btn btn-primary" ng-disabled="createClient.$invalid" value="Crear"></input>
+<input type="reset" class="btn btn-default" ng-click="onCancel()" value="Cancelar"/>
 </div>
 </form>
+<toaster-container></toaster-container>
 </div>

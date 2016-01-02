@@ -1,14 +1,12 @@
-angular.module('SCC', ['ngRoute'])
+angular.module('SCC', ['ngRoute', 'angular-md5', 'toaster'])
 	.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/crearCliente', {
 				templateUrl: 'app/pages/CrearCliente.html',
-				controller: 'crearCliente_ctrl',
-				controllerAs: "client"
+				controller: 'crearCliente_ctrl'
 			})
 			.when('/clientes', {
 				templateUrl: 'app/pages/ListaClientes.html',
-				controller: 'listaClientes_ctrl',
-				controllerAs: "listClients"
+				controller: 'listaClientes_ctrl'
 			}).when('/cobros', {
 				templateUrl: 'app/pages/ListaCobro.html',
 				controller: 'listaCobro_ctrl'

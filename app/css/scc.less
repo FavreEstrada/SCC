@@ -1,5 +1,8 @@
 @padding: 20px;
 .main-content {
+    input, textarea{
+        text-transform: capitalize;
+    }
     .title {
         text-align: center;
         margin-bottom: 30px;
@@ -36,6 +39,12 @@
             }
         }
     }
+    form{
+    .required label:after {
+            content: " *";
+            color: red;
+        }
+}
     .posLeft {
         text-align: right;
     }
@@ -48,6 +57,7 @@
         }
     }
 }
+
 @media (min-width: 992px) {
     .modal{
         .modal-dialog{

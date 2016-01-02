@@ -27,6 +27,8 @@ module.exports = function(grunt) {
             'lib/jquery/dist/jquery.min.js',
             'lib/angular/angular.min.js',
             'lib/angular-route/angular-route.min.js',
+            'lib/angular-md5/angular-md5.min.js',
+            'lib/AngularJS-Toaster/toaster.min.js',
             'lib/angular-cookies/angular-cookies.js',
             'lib/angular-route-styles/route-styles.js',
             'lib/d3/d3.min.js',
@@ -37,7 +39,7 @@ module.exports = function(grunt) {
         }
       },
       css: {
-        src: ['app/css/{,*/}*.css', 'app/directives/{,*/}*.css'],
+        src: ['app/css/{,*/}*.css', 'app/directives/{,*/}*.css', 'lib/AngularJS-Toaster/toaster.min.css'],
         dest: 'appCSS.css'
       }
     },

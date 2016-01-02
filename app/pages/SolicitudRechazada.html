@@ -1,7 +1,7 @@
 <div class="solicitud-rechazada col-lg-12 col-md-12 col-sm-12">
 <h4>Crear Solicitud Rechazada</h4>
-    <form id="forma" class="form-inline" name="createSol" onsubmit="">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+    <form id="forma" class="form-inline" name="createSol" onsubmit="saveRequest()">
+        <div class="col-lg-6 col-md-6 col-sm-6 required">
             <label>Primer Nombre:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -15,7 +15,7 @@
                 <input class="form-control" name="segundo_nombre" placeholder="Segundo Nombre" type="text" ng-maxlength="20"  />
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 required">
             <label>Primer Apellido:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -33,21 +33,22 @@
             <label>Barrio o Colonia:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-            <select class="form-control" name="barriocolonia" ng-model="client.costumer.bar" ></select>
+            <select class="form-control" name="barriocolonia" ng-model="neighbor" ng-options="option as option.abbr for option in neighborhoods track by option.id" ng-change="getCover()">
+            </select>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
         <label>Cobertura:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-            <input type="text" id="cob" name="cobertura" class="" readonly="readonly" />
+            <input type="text" id="cob" name="cobertura" class="form-control" readonly="readonly" ng-model="isCovered" />
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
         <label>Télefono:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-            <input class="form-control" id="phone" placeholder="Teléfono" name="telefono" type="tel" value="" ng-maxlength="8" />
+            <input class="form-control" id="phone" placeholder="Teléfono" name="telefono" type="tel" ng-maxlength="8" />
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -61,15 +62,15 @@
         <label>Email:</label>
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-            <input class="form-control" name="email" placeholder="Email" ng-model="client.costumer.email" type="email" ng-maxlength="30"/>
+            <input class="form-control" name="email" placeholder="Email" ng-model="client.customer.email" type="email" ng-maxlength="30"/>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="col-lg-6 col-md-6 col-sm-6 required">
         <label>Dirección: </label>
-        <textarea class="form-control inline" placeholder="Dirección"  name="direccion" ng-model="client.costumer.dir" ng-maxlength="45" required></textarea>
+        <textarea class="form-control inline" placeholder="Dirección"  name="direccion" ng-model="client.customer.dir" ng-maxlength="45" required></textarea>
     </div>
     <div class="col-lg-12  col-md-12 col-sm-12 cont-buttons">
-        <input type="submit" class="btn btn-primary" ng-disabled="createSol.user.$dirty && createSol.user.$invalid" value="Guardar"></input>
+        <input type="submit" class="btn btn-primary" ng-disabled="createSol.$invalid" value="Guardar"></input>
         <button class="btn" ng-click="">Cancelar</button>
     </div>
 </form>

@@ -29,7 +29,7 @@ angular.module('SCC').directive('menu', [ "$timeout", function($timeout) {
 				}, {
 					name: "Reportes",
 					options: [{
-						name: "DashBoards",
+						name: "Dashboards",
 						link: "#/dashboards"
 					}, {
 						name: "Solicitudes Rechazadas",

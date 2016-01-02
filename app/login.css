@@ -1,9 +1,14 @@
 .login-form-container {
   font-size: 16px;
-  background-color: #f5f5f5;
+}
+.login-form-container input {
+  text-transform: none;
 }
 .login-form-container p {
   font-weight: bold;
   font-size: 0.75em;
   color: #00536c;
+}
+.login-form-container .form-control-feedback {
+  right: 12px;
 }

@@ -1,8 +1,10 @@
-angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", function($scope, $location) {
-	var self = this;
-	self.columnSort = "ID";
-	self.reverseSort = false;
-	self.table = {
+angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", "$http", "Config", function($scope, $location, $http, Config) {
+
+	$scope.columnSort = "ID";
+	$scope.reverseSort = false;
+
+	initialize();
+	$scope.table = {
 		header: {
 			idClient: "ID",
 			first_name: "Primer Nombre",
@@ -15,68 +17,46 @@ angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", f
 			service: "Servicio",
 			date: "Fecha de Instalación"
 		},
-		body: [{
-			idClient: "1201",
-			first_name: "Osman",
-			middle_name: "Gabriel",
-			first_last: "Hernandez",
-			second_last: "Cerrato",
-			bar: "MAX",
-			status: "Activo",
-			contract: "1234",
-			service: "TV",
-			date: "12-04-2002"
-		}, {
-			idClient: "1202",
-			first_name: "Antonio",
-			middle_name: "Pedro",
-			first_last: "Caceres",
-			second_last: "Rodriguez",
-			bar: "ROT",
-			status: "Activo",
-			contract: "1235",
-			service: "TV",
-			date: "12-04-2002"
-		}, {
-			idClient: "1203",
-			first_name: "Etel",
-			middle_name: "Maria",
-			first_last: "Mejia",
-			second_last: "Iglesias",
-			bar: "MAM",
-			status: "Activo",
-			contract: "1290",
-			service: "TV",
-			date: "12-04-2002"
-		}, {
-			idClient: "1204",
-			first_name: "Juan",
-			middle_name: "Pablo",
-			first_last: "Maradiaga",
-			second_last: "Cortes",
-			bar: "CEI",
-			status: "Activo",
-			contract: "1286",
-			service: "TV",
-			date: "12-04-2002"
-		}]
+		body: [],
+		metadata: []
 	};
 
 
-	self.createClient = function() {
+	$scope.createClient = function() {
 		$location.path("/crearCliente");
 	};
-	self.sort = {
+	$scope.sort = {
 		column: 'idClient',
 		descending: false
 	};
 
-	self.selectedCls = function(column) {
-		return column === self.sort.column && 'sort-' + self.sort.descending;
+	function getCNCustomers() {
+		$http.get(Config.endpoints.getCNCustomers.url).then(function(data) {
+			data.data.forEach(function(val, i) {
+				$scope.table.body.push({
+					idClient: val.ID,
+					first_name: val.first_name,
+					middle_name: val.middle_name,
+					first_last: val.first_last,
+					second_last: val.second_last,
+					bar: val.neighbor,
+					status: val.customer_status,
+					contract: val.contract,
+					service: val.service,
+					date: val.inst_date
+				});
+				$scope.table.metadata.push(val);
+			});
+		}, function(error) {
+			console.log("Error getting natural customers: " + JSON.stringify(error));
+		});
+	}
+	$scope.selectedCls = function(column) {
+		return column === $scope.sort.column && 'sort-' + $scope.sort.descending;
 	};
 
-	self.changeSorting = function(column) {
-		var sort = self.sort;
+	$scope.changeSorting = function(column) {
+		var sort = $scope.sort;
 		if (sort.column === column) {
 			sort.descending = !sort.descending;
 		} else {
@@ -85,9 +65,13 @@ angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", f
 		}
 	};
 
-	self.seeDetails = function(client) {
+	$scope.seeDetails = function(client) {
 		$scope.modalContent = client;
-		self.modalTitle = client.first_name + " " + client.first_last;
+		$scope.modalTitle = client.first_name + " " + client.first_last;
 		$("#clientDetail").modal('show');
 	};
+
+	function initialize() {
+		getCNCustomers();
+	}
 }]);

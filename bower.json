@@ -23,7 +23,8 @@
     "angular-route": "~1.4.3",
     "angular-cookies": "~1.4.0",
     "angular-bootstrap": "~0.13.3",
-    "angular-md5": "~0.1.8",
-    "angular-route-styles": "*"
+    "angular-md5": "~0.1.10",
+    "angular-route-styles": "*",
+    "AngularJS-Toaster": "angularjs-toaster#~0.4.181"
   }
 }

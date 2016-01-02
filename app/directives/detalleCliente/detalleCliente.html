@@ -4,26 +4,26 @@
 			<label>Nombre:</label>
 			<div class="input-group col-lg-7 col-md-7 col-sm-7">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				<input type="text" class="form-control" readonly="true" value="{{name}}">
+				<input type="text" class="form-control" readonly="true" ng-value="name">
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<label>No. Contrato:</label>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-				<input type="text" class="form-control" readonly="true" value="">
+				<input type="text" class="form-control" readonly="true" ng-value="contract">
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<label>Servicio:</label>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-				<select class="form-control" name="service"></select> 
+				<input type="text" class="form-control" readonly="true" ng-value="service">
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<label>Cant. Extensiones: </label>
-			<input class="form-inline" type="number" name="exten"value="0" min="0" />
+			<input class="form-control" name="exten" ng-value="extens" readonly="true" />
 		</div>
 		<div class="ordenesCobros-cont col-lg-12 col-md-12 col-sm-12">
 			<h4>Órdenes de Cobros</h4>

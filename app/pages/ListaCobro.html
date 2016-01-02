@@ -34,7 +34,7 @@
           <td ng-repeat=" data in obj.row">
             <span ng-if="table.isSelect[$index] === 0">{{data}}</span>
             <select ng-if="table.isSelect[$index] !== 0" ng-click="selectClick($event);">
-                <option ng-repeat="opt in payStatus">{{opt.name}}</option>
+                <option ng-repeat="opt in payStatus" ng-selected="setSelectedStatus(opt.name)" ng-value="opt.id">{{opt.name}}</option>
             </select>
           </td>
         </tr>

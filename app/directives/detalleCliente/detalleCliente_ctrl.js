@@ -6,7 +6,10 @@ angular.module('SCC').directive('detalleCliente', [function() {
 
 			$scope.$watch('modalContent', function(newVal) {
 				if (newVal) {
-					$scope.name = $scope.modalContent.first_name + " " + $scope.modalContent.middle_name + " " + $scope.modalContent.first_last + " " + $scope.modalContent.second_last;
+					$scope.name = newVal.first_name + " " + newVal.middle_name + " " + newVal.first_last + " " + newVal.second_last;
+					$scope.contract = newVal.contract;
+					$scope.service = newVal.service;
+					$scope.extens = newVal.extens;
 				}
 			});
 			$scope.payTable = {
