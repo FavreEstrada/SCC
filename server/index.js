@@ -5,7 +5,7 @@ var path = require('path');
 var mysql = require('mysql');
 var db = {
 	user: "root",
-	password: "Tvcn@r3$",
+	password: "admin",
 	host: "localhost",
 	database: "sccdb",
 	charset: "latin1_swedish_ci",
