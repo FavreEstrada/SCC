@@ -1,4 +1,4 @@
-angular.module('SCC').controller('crearCliente_ctrl', ["$scope", "$http", "Config", '$window',  "toaster", function($scope, $http, Config, $window, toaster) {
+angular.module('SCC').controller('crearCliente_ctrl', ["$scope", "$http", "Config", '$window', "toaster", function($scope, $http, Config, $window, toaster) {
 	function createCustomerObj() {
 		$scope.customer = {
 			first_name: "",
@@ -20,10 +20,10 @@ angular.module('SCC').controller('crearCliente_ctrl', ["$scope", "$http", "Confi
 		var url = Config.endpoints.createClient.url;
 		var method = Config.endpoints.createClient.method;
 		var params_ = {
-			first_name: $scope.customer.first_name,
-			middle_name: $scope.customer.middle_name,
-			first_last: $scope.customer.first_last,
-			second_last: $scope.customer.second_last,
+			first_name: toTitleCase($scope.customer.first_name),
+			middle_name: toTitleCase($scope.customer.middle_name),
+			first_last: toTitleCase($scope.customer.first_last),
+			second_last: toTitleCase($scope.customer.second_last),
 			extens: $scope.customer.extens,
 			tel: $scope.customer.tel,
 			email: $scope.customer.email,
@@ -104,12 +104,19 @@ angular.module('SCC').controller('crearCliente_ctrl', ["$scope", "$http", "Confi
 			method: "GET",
 			params: {
 				personality_id: $scope.customer.personeria.id
-			}
+			},
+			cache: true
 		}).then(function(data) {
 			$scope.idsArray = data.data;
 			$scope.customer.id = data.data[0];
 		}, function(error) {
 			console.log("Error getting ids: " + JSON.stringify(error));
+		});
+	}
+
+	function toTitleCase(str) {
+		return str.replace(/\w\S*/g, function(txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		});
 	}
 }]);

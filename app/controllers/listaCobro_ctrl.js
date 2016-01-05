@@ -1,13 +1,12 @@
-angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$http", "Config", function($scope, $location, $http, Config) {
+angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$http", "Config", "toaster", "$timeout", function($scope, $location, $http, Config, toaster, $timeout) {
 	$scope.columnSort = "ID";
 	$scope.reverseSort = false;
-
+	$scope.discount = "0.00";
 	$scope.table = {
 		expandedTable: {
 			header: ["Fact.",
 				"Fecha",
 				"Mes en Mora",
-				"Servicio",
 				"Est. de Pago",
 				"Total"
 			]
@@ -29,6 +28,7 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 			console.log("Error getting payment status " + JSON.stringify(error));
 		});
 	}
+
 	$scope.getHeaderSize = function() {
 		if ($scope.table.header) {
 			return Object.keys($scope.table.header).length;
@@ -51,14 +51,48 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 
 	$scope.seeDetails = function(rowObj) {
 		rowObj.showExpandedData = !rowObj.showExpandedData;
+		if (rowObj.showExpandedData) {
+			rowObj.isLoadingExpandedData = true;
+			rowObj.expandedRow = [];
+			loadExpandedData(rowObj.metadata.idClient, function(data) {
+				data.data.forEach(function(val, i) {
+					rowObj.expandedRow.push({
+						fact: val.ID,
+						date: val.bill_date,
+						month_to_pay: getMonthName(val.month),
+						income_status: val.payment_status,
+						total: parseFloat(val.total).toFixed(2)
+					});
+				});
+				rowObj.isLoadingExpandedData = false;
+			}, function() {
+				rowObj.isLoadingExpandedData = false;
+			});
+		}
 	};
 
+	function loadExpandedData(customerID, successCallback, erroCallback) {
+		$http({
+			url: Config.endpoints.getBillDetails.url,
+			method: "GET",
+			params: {
+				customerID: customerID
+			},
+			cache: true
+		}).then(function(data) {
+			successCallback(data);
+		}, function(error) {
+			erroCallback();
+			console.log("Error getting bill details: " + JSON.stringify(error));
+		});
+	}
 	$scope.openPaymentModal = function(row, index) {
 		var client = row.row;
 		$scope.modalContent = {
 			row: row,
 			expandedRow: row.expandedRow[index]
 		};
+
 		$scope.modalTitle = client.first_name + " " + client.middle_name + " " + client.first_last + " " + client.second_last;
 		$("#clientDetail").modal('show');
 	};
@@ -73,13 +107,10 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 		$event.stopPropagation();
 	};
 
-	$scope.setSelectedStatus = function(status) {
-		return status === 'Pendiente - No Visitado ';
-	};
 
 	function loadCompanies() {
 		$scope.table.header = {
-			idClient: "ID",
+			idOrder: "",
 			company: "Nombre de la Empresa",
 			representant: "Representante",
 			bar: "Barrio/Colonia",
@@ -94,8 +125,10 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 	}
 
 	function loadClients() {
+		$scope.isLoadingTable = true;
+		$scope.table.body = [];
 		$scope.table.header = {
-			idClient: "ID",
+			idOrder: "",
 			first_name: "Primer Nombre",
 			middle_name: "Segundo Nombre",
 			first_last: "Primer Apellido",
@@ -107,6 +140,11 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 			service: "Servicio",
 			amount: "Cant. a Pagar"
 		};
+		/*
+		 0 For Span,
+		 1 for Select,
+		 2 for input
+		*/
 		$scope.table.isSelect = [
 			0,
 			0,
@@ -116,114 +154,123 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 			0,
 			0,
 			1,
-			0,
+			2,
 			0,
 			0
 		];
-		$scope.table.body = [{
-			row: {
-				idClient: "1201",
-				first_name: "Osman",
-				middle_name: "Gabriel",
-				first_last: "Hernandez",
-				second_last: "Cerrato",
-				bar: "MAX",
-				monthToPay: "1",
-				status: "Visitado",
-				date: "12-04-2002",
-				service: "TV",
-				amount: "150.00"
-			},
-			showExpandedData: false,
-			expandedRow: [{
-				fact: "1001",
-				date: "20/12/15",
-				month_pay: "Marzo",
-				service: "TV",
-				pay_status: "En Mora",
-				total: "150.00"
-			}]
-		}, {
-			row: {
-				idClient: "1202",
-				first_name: "Antonio",
-				middle_name: "Pedro",
-				first_last: "Caceres",
-				second_last: "Rodriguez",
-				bar: "ROT",
-				monthToPay: "2",
-				status: "No Visitado",
-				date: "12-04-2002",
-				service: "TV",
-				amount: "150.00"
-			},
-			showExpandedData: false,
-			expandedRow: [{
-				fact: "1001",
-				date: "20/12/15",
-				month_pay: "Marzo",
-				service: "TV",
-				pay_status: "Vencido",
-				total: "150.00"
-			}, {
-				fact: "1002",
-				date: "20/12/15",
-				month_pay: "Abril",
-				service: "TV",
-				pay_status: "Vencido",
-				total: "150.00"
-			}]
-		}, {
-			row: {
-				idClient: "1203",
-				first_name: "Etel",
-				middle_name: "Maria",
-				first_last: "Mejia",
-				second_last: "Iglesias",
-				bar: "MAM",
-				monthToPay: "1",
-				status: "Visitado",
-				date: "12-04-2002",
-				service: "TV",
-				amount: "150.00"
-			},
-			showExpandedData: false,
-			expandedRow: [{
-				fact: "1001",
-				date: "20/12/15",
-				month_pay: "Marzo",
-				service: "TV",
-				pay_status: "En Mora",
-				total: "150.00"
-			}]
-		}, {
-			row: {
-				idClient: "1204",
-				first_name: "Juan",
-				middle_name: "Pablo",
-				first_last: "Maradiaga",
-				second_last: "Cortes",
-				bar: "CEI",
-				monthToPay: "3",
-				status: "No Visitado",
-				date: "12-04-2002",
-				service: "TV",
-				amount: "150.00"
-			},
-			showExpandedData: false,
-			expandedRow: [{
-				fact: "1001",
-				date: "20/12/15",
-				month_pay: "Marzo",
-				service: "TV",
-				pay_status: "Vencido",
-				total: "150.00"
-			}]
-		}];
+
+		$http.get(Config.endpoints.getPaymentList.url).then(function(data) {
+			data.data.forEach(function(val, i) {
+				$scope.table.body.push({
+					row: {
+						idOrder: (i + 1),
+						first_name: val.first_name,
+						middle_name: val.middle_name,
+						first_last: val.first_last,
+						second_last: val.second_last,
+						bar: val.neighbor,
+						monthToPay: val.month_to_pay,
+						status: $scope.payStatus.filter(function(status) {
+							return status.name === val.payment_status;
+						})[0],
+						date: val.visit_date ? new Date(val.visit_date) : "",
+						service: val.service,
+						amount: parseFloat(val.total).toFixed(2)
+					},
+					metadata: {
+						idClient: val.IDClient,
+						idContract: val.IDContract
+					},
+					showExpandedData: false,
+					isLoadingExpandedData: false,
+					expandedRow: []
+				});
+			});
+			$scope.isLoadingTable = false;
+		}, function(error) {
+			$scope.isLoadingTable = false;
+			console.log("Error getting payment status " + JSON.stringify(error));
+		});
 
 	}
+
+	function getMonthName(monthNumber) {
+		var month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+		return month[monthNumber - 1];
+	}
+
+	$scope.updateIncStatus = function(incStatus, rowObj) {
+		if (incStatus.name !== "Realizado") {
+			$http({
+				url: Config.endpoints.updateOrderStatus.url,
+				method: Config.endpoints.updateOrderStatus.method,
+				params: {
+					contractID: rowObj.metadata.idContract,
+					status: incStatus.id,
+					userID: Config.user.Id
+				}
+			}).then(function(data) {
+				toaster.pop('success', "", "Estado de orden de cobro actualizado");
+			}, function(error) {
+				toaster.pop('error', "", "Error al actualizar estado de orden de cobro");
+				console.log("Error updating order status: " + JSON.stringify(error));
+			});
+		} else {
+			loadExpandedData(rowObj.metadata.idClient, function(data) {
+				data.data.forEach(function(val, i) {
+					rowObj.expandedRow.push({
+						fact: val.ID,
+						date: val.bill_date,
+						month_to_pay: getMonthName(val.month),
+						income_status: val.payment_status,
+						total: parseFloat(val.total).toFixed(2)
+					});
+				});
+				$scope.openPaymentModal(rowObj, 0);
+			});
+		}
+	};
+	$scope.updateVisitDate = function(date_, rowObj) {
+		if (date_) {
+			$http({
+				url: Config.endpoints.updateOrderVisitDate.url,
+				method: Config.endpoints.updateOrderVisitDate.method,
+				params: {
+					contractID: rowObj.metadata.idContract,
+					visitDate: formatDatetoMYSQLFormat(date_),
+					userID: Config.user.Id
+				}
+			}).then(function(data) {
+				toaster.pop('success', "", "Fecha de visita de orden de cobro actualizado");
+			}, function(error) {
+				toaster.pop('error', "", "Error al actualizar fecha de visita de orden de cobro");
+				console.log("Error updating order visit date: " + JSON.stringify(error));
+			});
+		}
+	};
 
 	function initialize() {
 		getPaymentStatus();
 	}
+
+	function formatDatetoMYSQLFormat(date_) {
+		var toFixDate = new Date(date_);
+		var fixedDate = toFixDate.getFullYear() + "/" + (toFixDate.getMonth() + 1) + "/" + toFixDate.getDate();
+		return fixedDate;
+	}
+
+	$scope.processPayment = function() {
+		var total = modalContent.expandedRow.total;
+		$htttp({
+			url: Config.endpoints.makePayment.url,
+			methodL Config.endpoints.makePayment.method,
+			params:{
+				contractID: $scope.modalContent.row.metadata.idContract, 
+				amountPaid: $scope.amountPaid, 
+				discount: $scope.discount, 
+				numFact: $scope.numRecibo, 
+				userID: Config.user.Id
+			}
+		}).then();
+	};
 }]);

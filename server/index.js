@@ -24,7 +24,8 @@ connection.connect(function(err) {
 //To let call endpoints using localhost
 app.all('/*', function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 	next();
 });
 
@@ -32,6 +33,7 @@ app.get('/testEndpoint', function(req, res) {
 	return res.json("Server Alive");
 });
 
+// GENERAL 
 app.get('/get_all_neighborhoods', function(req, res) {
 	var query = "SELECT IDBarriocolonia as id, Nombre as name, Abreviacion as abbr, Cobertura as covered, Observacion as Obs FROM  barriocolonia ORDER BY name";
 
@@ -100,6 +102,8 @@ app.get('/get_personality', function(req, res) {
 
 	});
 });
+
+//Payment List
 app.get('/get_payment_status', function(req, res) {
 	var query = "SELECT ID as id, Nombre as name, Descripcion as description FROM  estado_cobro WHERE Estado = 0 ORDER BY name";
 
@@ -113,7 +117,7 @@ app.get('/get_payment_status', function(req, res) {
 	});
 });
 app.get('/get_payment_list_cn', function(req, res) {
-	var query = " SELECT cn.IDCliente,Primer_Nombre as first_name, Segundo_Nombre as middle_name, Primer_Apellido as first_last, Segundo_Apellido as second_last, ba.Abreviacion as neighbor,oc.Fecha_Visita as visit_date, NoID, No_Conexiones as extens, count(oc.Fecha) as month_to_pay, ec.Nombre as payment_status,SUM(CantidadPagar) as total, s.Nombre as service FROM cliente_natural cn,barriocolonia ba, cliente cl, contrato con, orden_cobro oc, estado_cobro ec, estado_pago_cliente ep, servicio s WHERE cn.CLIENTE_idCLIENTE=cl.idCLIENTE AND cl.idCLIENTE=con.CLIENTE_idCLIENTE AND con.IDBarriocolonia=ba.IDBarriocolonia AND oc.CONTRATO_IDContrato = IDContrato AND ec.ID = oc.ESTADO_COBRO_ID AND ep.ID=oc.ESTADO_PAGO_CLIENTE_ID AND oc.Fecha < CURDATE() AND Fecha_Pagada IS NULL AND con.SERVICIO_ID=s.ID AND ESTADO_GENERAL_CLIENTE_ID != (SELECT ID FROM estado_general_cliente WHERE Nombre = 'INACTIVO') GROUP BY cn.IDCliente,first_name, middle_name, first_last, second_last, neighbor, visit_date, NoID, extens, payment_status, service";
+	var query = "SELECT cn.CLIENTE_idCLIENTE AS IDClient, IDOrdenCobro AS IDOrder, IDContrato as IDContract, Primer_Nombre AS first_name, Segundo_Nombre AS middle_name, Primer_Apellido AS first_last, Segundo_Apellido AS second_last, ba.Abreviacion AS neighbor,oc.Fecha_Visita AS visit_date, NoID, No_Conexiones AS extens, count(oc.Fecha) AS month_to_pay, ec.Nombre AS payment_status,SUM(CantidadPagar) AS total, s.Nombre AS service FROM cliente_natural cn,barriocolonia ba, cliente cl, contrato con, orden_cobro oc, estado_cobro ec, estado_pago_cliente ep, servicio s WHERE cn.CLIENTE_idCLIENTE=cl.idCLIENTE AND cl.idCLIENTE=con.CLIENTE_idCLIENTE AND con.IDBarriocolonia=ba.IDBarriocolonia AND oc.CONTRATO_IDContrato = IDContrato AND ec.ID = oc.ESTADO_COBRO_ID AND ep.ID=oc.ESTADO_PAGO_CLIENTE_ID AND oc.Fecha < CURDATE() AND Fecha_Pagada IS NULL AND con.SERVICIO_ID=s.ID AND ESTADO_GENERAL_CLIENTE_ID != (SELECT ID FROM estado_general_cliente WHERE Nombre = 'INACTIVO') GROUP BY  IDClient, IDOrder, IDContract, first_name, middle_name, first_last, second_last, neighbor, visit_date, NoID, extens, payment_status, service";
 
 	connection.query(query, function(err, rows, fields) {
 		if (!err) {
@@ -124,12 +128,101 @@ app.get('/get_payment_list_cn', function(req, res) {
 
 	});
 });
+app.get('/get_bill_details', function(req, res) {
+	var customerID = req.query.customerID;
+
+	if (customerID !== undefined || customerID !== null) {
+		var query = " SELECT oc.IDOrdenCobro AS ID, oc.Fecha AS bill_date, month(oc.Fecha) AS month, ep.Nombre AS payment_status, oc.CantidadPagar AS total FROM orden_cobro AS oc JOIN (contrato AS con, estado_pago_cliente AS ep) ON (oc.CONTRATO_IDContrato = con.IDContrato AND oc.ESTADO_PAGO_CLIENTE_ID = ep.ID) WHERE con.CLIENTE_idCLIENTE = ?";
+
+		connection.query(query, [customerID], function(err, rows, fields) {
+			if (!err) {
+				return res.json(rows);
+			} else {
+				return res.send("Error in getBillDetails " + JSON.stringify(err));
+			}
+
+		});
+	} else {
+		return res.status(500).send('MIssing customerID parameter');
+	}
+});
+app.put('/update_order_status', function(req, res) {
+	var contractID = req.query.contractID;
+	var status = req.query.status;
+	var userID = req.query.userID
+
+	if ((contractID !== undefined || contractID !== null) && (status !== undefined || status !== null) && (userID !== undefined || userID !== null)) {
+		var query = "UPDATE `sccdb`.`orden_cobro` SET `IDUsuario` = ?, `ESTADO_PAGO_CLIENTE_ID` = ?, `Fecha_Visita` =  current_date() WHERE `CONTRATO_IDContrato` = ?";
+
+		connection.query(query, [userID, status, contractID], function(err, rows, fields) {
+			if (!err) {
+				return res.json({
+					success: true
+				});
+			} else {
+				return res.send("Error in updateOrderStatus " + JSON.stringify(err));
+			}
+
+		});
+	} else {
+		return res.status(500).send('MIssing parameters: contractID, status, userID');
+	}
+});
+app.put('/update_order_visit_date', function(req, res) {
+	var contractID = req.query.contractID;
+	var visitDate = req.query.visitDate;
+	var userID = req.query.userID
+
+	if ((contractID !== undefined || contractID !== null) && (userID !== undefined || userID !== null) && (visitDate !== undefined || visitDate !== null)) {
+		var query = "UPDATE `sccdb`.`orden_cobro` SET `IDUsuario` = ?,  `Fecha_Visita` =  ? WHERE `CONTRATO_IDContrato` = ?";
+
+		connection.query(query, [userID, visitDate, contractID], function(err, rows, fields) {
+			if (!err) {
+				return res.json({
+					success: true
+				});
+			} else {
+				return res.send("Error in updateOrderVisitDate " + JSON.stringify(err));
+			}
+
+		});
+	} else {
+		return res.status(500).send('MIssing parameters: contractID, visitDate, userID');
+	}
+});
+app.post('/process_payment', function(req, res) {
+	var contractID = req.query.contractID;
+	var discount = req.query.discount;
+	var userID = req.query.userID;
+	var amountPaid = req.query.amountPaid;
+	var numFact = req.query.numFact;
+
+	if ((contractID !== undefined || contractID !== null) && (userID !== undefined || userID !== null) && (discount !== undefined || discount !== null) && (amountPaid !== undefined || amountPaid !== null) && (numFact !== undefined || numFact !== null) ) {
+		var query = "CALL processPayment(?,?,?,?,?)";
+
+		connection.query(query, [contractID, amountPaid, discount, numFact, userID], function(err, rows, fields) {
+			if (!err) {
+				return res.json({
+					success: true
+				});
+			} else {
+				return res.send("Error in processPayment " + JSON.stringify(err));
+			}
+
+		});
+	} else {
+		return res.status(500).send('MIssing parameters: contractID, discount, amountPaid, userID,numFact');
+	}
+});
+
+
+//CUSTOMER LIST
 app.get('/get_customer_cn', function(req, res) {
 	var query = "SELECT cn.IDCliente as ID,Primer_Nombre as first_name, Segundo_Nombre as middle_name, Primer_Apellido as first_last, Segundo_Apellido second_last,NoID as ident, id.Tipo as id_type, ba.Abreviacion as neighbor,  eg.Nombre as customer_status, IDContrato as contract, con.No_Conexiones as extens, s.Nombre as service, con.Fecha as inst_date FROM cliente_natural cn,barriocolonia ba,cliente cl ,contrato con, estado_general_cliente eg,  servicio s, identificacion id WHERE cn.CLIENTE_idCLIENTE=cl.idCLIENTE AND cl.idCLIENTE=con.CLIENTE_idCLIENTE AND con.IDBarriocolonia=ba.IDBarriocolonia AND cn.ESTADO_GENERAL_CLIENTE_ID = eg.ID AND con.SERVICIO_ID=s.ID AND cn.IDENTIFICACION_ID = id.ID  ORDER BY (Primer_Nombre)";
 
 	connection.query(query, function(err, rows, fields) {
 		if (!err) {
-			return res.json(rows);
+			return res.json(rows);q
 		} else {
 			return res.status(500).send("Error in getNaturalCustomers " + JSON.stringify(err));
 		}
