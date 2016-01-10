@@ -242,6 +242,7 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 				}
 			}).then(function(data) {
 				toaster.pop('success', "", "Fecha de visita de orden de cobro actualizado");
+
 			}, function(error) {
 				toaster.pop('error', "", "Error al actualizar fecha de visita de orden de cobro");
 				console.log("Error updating order visit date: " + JSON.stringify(error));
@@ -260,17 +261,28 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 	}
 
 	$scope.processPayment = function() {
-		var total = modalContent.expandedRow.total;
-		$htttp({
-			url: Config.endpoints.makePayment.url,
-			methodL Config.endpoints.makePayment.method,
-			params:{
-				contractID: $scope.modalContent.row.metadata.idContract, 
-				amountPaid: $scope.amountPaid, 
-				discount: $scope.discount, 
-				numFact: $scope.numRecibo, 
-				userID: Config.user.Id
-			}
-		}).then();
+		var total = $scope.modalContent.expandedRow.total;
+		if ($scope.amountPaid > 0) {
+			$http({
+				url: Config.endpoints.makePayment.url,
+				method: Config.endpoints.makePayment.method,
+				params: {
+					contractID: $scope.modalContent.row.metadata.idContract,
+					amountPaid: parseFloat($scope.amountPaid).toFixed(2),
+					discount: $scope.discount,
+					numFact: $scope.numRecibo,
+					userID: Config.user.Id
+				}
+			}).then(function(data) {
+				toaster.pop('success', "", "Pago de orden de cobro procesado correctamente");
+				$("#clientDetail").modal('hide');
+				$modalContent = null;
+				$scope.seeBy();
+
+			}, function(error) {
+				toaster.pop('error', "", "Error al procesar el pago de orden de cobro");
+				console.log("Error procesing payment: " + JSON.stringify(error));
+			});
+		}
 	};
 }]);
