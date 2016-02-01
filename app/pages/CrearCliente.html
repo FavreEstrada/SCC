@@ -5,7 +5,7 @@
             <label>Tipo de Personería:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphglyphicon glyphicon-list"></i></span>
-                <select name="tipoper" ng-model="customer.personeria" class="form-control" ng-options="option as option.name for option in personeria track by option.id" ng-change="loadIDs()">
+                <select name="tipoper" ng-model="customer.personeria" class="form-control" ng-options="option as option.name for option in personeria track by option.id" ng-change="loadIDs()" ng-disabled="mode">
                 </select>
             </div>
         </div>
@@ -17,15 +17,15 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="col-lg-4 col-md-4 col-sm-4 required">
             <label>No. de Identificación:</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                <input class="form-control" ng-model="customer.noID" name="no_identificacion"/>
+                <input class="form-control" ng-model="customer.noID" name="no_identificacion" required/>
             </select>
         </div>
     </div>
-    <!-- CLiente Natural -->
+    <!-- Cliente Natural -->
     <div class="col-lg-4 col-md-4 col-sm-4">
         <label>Estado Gen. del Cliente:</label>
         <div class="input-group">
@@ -71,6 +71,30 @@
         <input class="form-control" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="customer.second_last" type="text" ng-maxlength="20"/>
     </div>
 </div>
+<!-- Termina Cliente Natural -->
+<!-- Cliente Juridico -->
+<div class="col-lg-4 col-md-4 col-sm-4 required" ng-if="customer.personeria.name === 'Juridica'">
+    <label>Nombre de la Empresa:</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input class="form-control" name="company_name" placeholder="Empresa" ng-model="customer.company" type="text" ng-maxlength="30" required/>
+    </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4" ng-if="customer.personeria.name === 'Juridica'">
+    <label>Representante:</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input class="form-control" name="company_repres" placeholder="Representante" ng-model="customer.representant" type="text" ng-maxlength="20"/>
+    </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4" ng-if="customer.personeria.name === 'Juridica'">
+    <label>Cargo:</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input class="form-control" name="company_positiion" placeholder="Cargo" ng-model="customer.position" type="text" ng-maxlength="20"/>
+    </div>
+</div>
+<!-- Termina Cliente Juridico -->
 <div class="col-lg-4 col-md-4 col-sm-4">
     <label>Barrio o Colonia:</label>
     <div class="input-group">
@@ -84,6 +108,13 @@
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
         <input class="form-control" id="phone" placeholder="Teléfono" name="telefono" ng-model="customer.tel" type="tel" value="" ng-maxlength="8" />
+    </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4" ng-if="customer.personeria.name === 'Juridica'">
+    <label>Fax:</label>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+        <input class="form-control" id="phone" placeholder="Fax" name="fax" ng-model="customer.fax" type="tel" value="" ng-maxlength="8" />
     </div>
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -102,9 +133,8 @@
     <textarea class="form-control inline"  name="observaciones" placeholder="Observaciones" ng-model="customer.obs" ng-maxlength="45"></textarea>
 </div>
 <div class="col-lg-12  col-md-12 col-sm-12 cont-buttons">
-    <input type="submit" class="btn btn-primary" ng-disabled="createClient.$invalid" value="Crear"></input>
+    <input type="submit" class="btn btn-primary" ng-disabled="createClient.$invalid" ng-value="mode ? 'Guardar': 'Crear' "></input>
     <input type="reset" class="btn btn-default" ng-click="onCancel()" value="Cancelar"/>
 </div>
 </form>
-<toaster-container></toaster-container>
 </div>

@@ -4,3 +4,13 @@
 .detalle-cliente form .name .input-group-addon {
   width: 1%;
 }
+.detalle-cliente form .ordenesCobros-cont,
+.detalle-cliente form .ordenesTrabajo-cont {
+  margin-top: 20px;
+  border-top: 1px solid lightgray;
+  padding-top: 20px;
+}
+.detalle-cliente form .ordenesCobros-cont .table-container,
+.detalle-cliente form .ordenesTrabajo-cont .table-container {
+  margin-top: 15px;
+}

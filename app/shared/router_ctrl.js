@@ -1,6 +1,11 @@
 angular.module('SCC', ['ngRoute', 'angular-md5', 'toaster'])
 	.config(['$routeProvider', function($routeProvider) {
-		$routeProvider.when('/crearCliente', {
+		$routeProvider
+			.when('/crearCliente', {
+				templateUrl: 'app/pages/CrearCliente.html',
+				controller: 'crearCliente_ctrl'
+			})
+			.when('/crearCliente/:id', {
 				templateUrl: 'app/pages/CrearCliente.html',
 				controller: 'crearCliente_ctrl'
 			})

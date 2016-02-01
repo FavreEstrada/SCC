@@ -1,6 +1,7 @@
 @padding: 20px;
+
 .main-content {
-    input, textarea{
+    input, textarea {
         text-transform: capitalize;
     }
     .title {
@@ -39,12 +40,12 @@
             }
         }
     }
-    form{
-    .required label:after {
+    form {
+        .required label:after {
             content: " *";
             color: red;
         }
-}
+    }
     .posLeft {
         text-align: right;
     }
@@ -57,11 +58,16 @@
         }
     }
 }
+@media (min-width:992px) {
+    .modal {
+        .modal-dialog {
+            &.large {
+                width: 1080px;
+            }
 
-@media (min-width: 992px) {
-    .modal{
-        .modal-dialog{
-            width: 1080px;
+            &.wide{
+                width: 1200px;
+            }
         }
     }
 }

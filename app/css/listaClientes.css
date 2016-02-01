@@ -1,11 +1,27 @@
-.clientList-Cont form.edit-client > div {
-  margin: 10px 0 10px 0;
-}
-.clientList-Cont form.edit-client .inline {
+.clientList-Cont .radio-container {
   display: inline-block;
 }
-.clientList-Cont .table thead th {
+.clientList-Cont .total-wrapper .total {
+  font-size: 16px;
+}
+.clientList-Cont .total-wrapper .total,
+.clientList-Cont .total-wrapper .total-label {
+  font-weight: bold;
+}
+.clientList-Cont .total-wrapper button {
+  float: right;
+}
+.clientList-Cont .table-wrapper {
+  margin-top: 15px;
+  height: 67vh;
+  overflow-y: auto;
+}
+.clientList-Cont .table-wrapper .table thead th {
   background: #337ab7;
   color: white;
   font-weight: normal;
+}
+.clientList-Cont .modal .modal-content .modal-header .title-inline {
+  display: inline-block;
+  vertical-align: middle;
 }

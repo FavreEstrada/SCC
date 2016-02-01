@@ -1,17 +1,27 @@
 @tableHeadColor: #337ab7;
 
-    .clientList-Cont {
-        form.edit-client {
-            > div {
-                margin: 10px 0 10px 0;
-            }
-            .inline {
-                display: inline-block;
-            }
+.clientList-Cont {
+    .radio-container {
+        display: inline-block;
+    }
+    .total-wrapper{
+        .total{
+            font-size: 16px;
         }
-        .table{
-            thead{
-                th{
+        .total, .total-label{
+            font-weight: bold;
+        }
+        button{
+            float: right;
+        }
+    }
+    .table-wrapper {
+        margin-top: 15px;
+        height: 67vh;
+        overflow-y: auto; 
+        .table {
+            thead {
+                th {
                     background: @tableHeadColor;
                     color: white;
                     font-weight: normal;
@@ -19,3 +29,14 @@
             }
         }
     }
+    .modal {
+        .modal-content {
+            .modal-header {
+                .title-inline {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}

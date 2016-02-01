@@ -23,15 +23,43 @@ angular.module('SCC').factory('Config', [function() {
             },
             //Customer List
             getCNCustomers: {
+                url: base_url + "get_customers_cn"
+            },
+            getCNCustomer: {
                 url: base_url + "get_customer_cn"
             },
-            createClient: {
-                url: base_url + "create_customer",
+            getCJCustomers: {
+                url: base_url + "get_customers_cj"
+            },
+            getCJCustomer: {
+                url: base_url + "get_customer_cj"
+            },
+            getPaymentsOrdersInDetails: {
+                url: base_url + "get_payment_order_details"
+            },
+            createClientCN: {
+                url: base_url + "create_customer_cn",
                 method: "POST"
             },
+            createClientCJ: {
+                url: base_url + "create_customer_cj",
+                method: "POST"
+            },
+            updateCustomerCN: {
+                url: base_url + "update_customer_cn",
+                method: "PUT"
+            },
+            createPaymentOrder: {
+                url: base_url + "create_payment_order",
+                method: "POST"
+            },
+
             //Payment List
-            getPaymentList: {
+            getPaymentListCN: {
                 url: base_url + "get_payment_list_cn"
+            },
+            getPaymentListCJ: {
+                url: base_url + "get_payment_list_cj"
             },
             getPaymentStatus: {
                 url: base_url + "get_payment_status"
