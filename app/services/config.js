@@ -49,6 +49,10 @@ angular.module('SCC').factory('Config', [function() {
                 url: base_url + "update_customer_cn",
                 method: "PUT"
             },
+            updateCustomerCJ: {
+                url: base_url + "update_customer_cj",
+                method: "PUT"
+            },
             createPaymentOrder: {
                 url: base_url + "create_payment_order",
                 method: "POST"

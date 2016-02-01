@@ -292,10 +292,23 @@ app.post('/create_customer_cn', function(req, res) {
 
 	});
 });
-
 app.put('/update_customer_cn', function(req, res) {
 	var params = [req.query.first_name, req.query.middle_name, req.query.first_last, req.query.second_last, req.query.address, req.query.tel, req.query.email, req.query.obs, req.query.ident, req.query.NoID, req.query.neighbor, req.query.userID, req.query.service, req.query.extens, req.query.IDCustomer, req.query.contractID, req.query.customerStatus];
 	var query = "CALL updateCustomerCN(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	connection.query(query, params, function(err, rows, fields) {
+		if (!err) {
+			return res.json({
+				success: true
+			});
+		} else {
+			return res.status(500).send("Error in update_customer " + JSON.stringify(err));
+		}
+
+	});
+});
+app.put('/update_customer_cj', function(req, res) {
+	var params = [req.query.company_name, req.query.representant, req.query.position, req.query.address, req.query.tel, req.query.fax, req.query.email, req.query.obs, req.query.ident, req.query.NoID, req.query.neighbor, req.query.userID, req.query.service, req.query.extens, req.query.IDCustomer, req.query.contractID, req.query.customerStatus];
+	var query = "CALL updateCustomerCJ(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	connection.query(query, params, function(err, rows, fields) {
 		if (!err) {
 			return res.json({

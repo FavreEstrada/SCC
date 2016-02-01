@@ -54,7 +54,12 @@ angular.module('SCC').controller('crearCliente_ctrl', ["$scope", "$http", "Confi
 			params_.IDCustomer = $scope.customerID;
 			params_.customerStatus = $scope.customer.status;
 			if ($scope.personality === 2) {
-
+				url = Config.endpoints.updateCustomerCJ.url;
+				method = Config.endpoints.updateCustomerCJ.method;
+				params_.company_name = $scope.customer.company;
+				params_.representant = $scope.customer.representant;
+				params_.position = $scope.customer.position;
+				params_.fax = $scope.customer.fax;
 			}
 		} else {
 			url = Config.endpoints.createClientCN.url;

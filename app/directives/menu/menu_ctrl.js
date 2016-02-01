@@ -35,8 +35,11 @@ angular.module('SCC').directive('menu', [ "$timeout", function($timeout) {
 						name: "Solicitudes Rechazadas",
 						link: "#/solicitudes"
 					}, {
-						name: "Órdenes",
-						link: "#/ordenes"
+						name: "Órdenes de Cobro",
+						link: "#/reporteCobros",
+					},{
+						name: "Órdenes de Trabajo",
+						link: "#/reporteTrabajos",
 					}]
 				}, {
 					name: "Parametrización",

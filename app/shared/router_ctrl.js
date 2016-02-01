@@ -21,6 +21,9 @@ angular.module('SCC', ['ngRoute', 'angular-md5', 'toaster'])
 			}).when('/crearSolicitud', {
 				templateUrl: 'app/pages/solicitudRechazada.html',
 				controller: 'solicitudRechazada_ctrl'
+			}).when('/reporteCobros', {
+				templateUrl: 'app/pages/reporteCobros.html',
+				controller: 'reporteCobros_ctrl'
 			})
 			.otherwise({
 				redirectTo: '/login'

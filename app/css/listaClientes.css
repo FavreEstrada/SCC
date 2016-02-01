@@ -1,5 +1,6 @@
 .clientList-Cont .radio-container {
   display: inline-block;
+  margin-left: 10px;
 }
 .clientList-Cont .total-wrapper .total {
   font-size: 16px;
