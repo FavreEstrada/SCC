@@ -1,29 +1,55 @@
 <div class="rep-cobros-cont col-lg-12 col-md-12 col-sm-12">
 	<h4>Reporte de Órdenes de Cobros</h4>
 	<div class="filters-wrapper col-lg-12 col-md-12 col-sm-12 form-inline">
-		<div class="col-lg-4 col-md-4 col-sm-4 ">
+		<div class="col-lg-3 col-md-3 col-sm-3 ">
 			<label>Barrio/Colonia:</label>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-				<!-- ng-options="option as option.name for option in services track by option.id"  -->
-				<select class="form-control" name="servicio" ng-model="neighbor" ></select>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-4 col-sm-4">
-			<label>Cobrador Por:</label>
-			<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				<!-- ng-options="option as option.name for option in services track by option.id"  -->
-				<select class="form-control" name="servicio" ng-model="neighbor" ></select>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-4 col-sm-4">
-			<label>Fecha:</label>
-			<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				<!-- ng-options="option as option.name for option in services track by option.id"  -->
-				<select class="form-control" name="servicio" ng-model="neighbor" ></select>
-			</div>
+			<select class="form-control" name="neighbor" ng-model="neighbor"  ng-options="option as option.abbr for option in neighbors track by option.id" ng-change="update()"></select>
 		</div>
 	</div>
+	<div class="col-lg-3 col-md-3 col-sm-3">
+		<label>Cobrador Por:</label>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		<select class="form-control" name="collector" ng-model="collector"  ng-options="option as option.userName for option in users track by option.userID" ng-change="update()"></select>
+	</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6">
+	<div class="col-lg-5 col-md-5 col-sm-5 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+		<label>Desde:</label>
+		<div class="input-group ">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			<input type="date" class="form-control" name="dataRange" ng-model="startDate"/>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6">
+		<label>Hasta:</label>
+		<div class="input-group ">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			<input type="date" class="form-control" name="dataRange" ng-model="endDate" />
+		</div>
+	</div>
+</div>
+</div>
+<div class="table-wrapper col-lg-12 col-md-12 col-sm-12">
+<label>Total Recaudado: {{totalRecaudado | currency : "Lps. " : 2}}</label>
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th ng-repeat="(key, val) in table.header" ng:class="selectedCls(key)" ng:click="changeSorting(key)">{{val}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in table.body | orderBy:sort.column:sort.descending">
+			<td ng-repeat="(key, field) in row">{{field}}</td>
+		</tr>
+		<tr ng-show="isLoading" class="loader">
+			<td colspan="{{getHeaderLength()}}">
+				<csc-load-icon></csc-load-icon>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
 </div>

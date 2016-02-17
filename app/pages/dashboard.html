@@ -1,0 +1,15 @@
+<div class="col-lg-12 col-md-12 col-sm-12 dashboard-cont">
+	<h4>Gráficos</h4>
+	<div class="filters-wrapper col-lg-12 col-md-12 col-sm-12">
+		<div class="col-lg-4 col-md-4 col-sm-4 form-inline">
+			<label>Periocidad:</label>
+			<select class="form-control"  ng-model="period" ng-options="option as option.value for option in filters track by option.id" ng-change="update()"></select>
+		</div>
+	</div>
+	<div class="graph-wrapper col-lg-12 col-md-12 col-sm-12" >
+		<div ng-if="isLoading" class="loader">
+			<csc-load-icon></csc-load-icon>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6" id="bargraph"></div>
+	</div>
+</div>

@@ -24,6 +24,9 @@ angular.module('SCC', ['ngRoute', 'angular-md5', 'toaster'])
 			}).when('/reporteCobros', {
 				templateUrl: 'app/pages/reporteCobros.html',
 				controller: 'reporteCobros_ctrl'
+			}).when('/dashboards', {
+				templateUrl: 'app/pages/dashboard.html',
+				controller: 'dashboard_ctrl'
 			})
 			.otherwise({
 				redirectTo: '/login'

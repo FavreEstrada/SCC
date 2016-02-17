@@ -1,0 +1,13 @@
+.dashboard-cont .graph-wrapper {
+  height: 100%;
+  margin-top: 25px;
+}
+.dashboard-cont .graph-wrapper > div {
+  height: 60%;
+}
+.dashboard-cont .graph-wrapper > div.loader {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+}

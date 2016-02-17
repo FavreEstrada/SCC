@@ -16,6 +16,12 @@
 .main-content .header .menu {
   padding-left: 0;
 }
+.main-content .header .navbar {
+  background-color: #ecf0f1;
+}
+.main-content .header .navbar a {
+  color: black;
+}
 .main-content .header .navbar .dropdown .dropdown-menu .submenu-show {
   left: 100%;
   top: 0px;
@@ -23,7 +29,8 @@
 .main-content .content {
   padding-top: 20px;
   padding-left: calc(25px);
-  background: none repeat scroll 0% 0% #f9f9f9;
+  background: #ecf0f1;
+  height: 86vh;
 }
 .main-content .content form.create-client > div {
   margin: 10px 0 10px 0;
@@ -40,6 +47,13 @@
 }
 .main-content .modal .modal-body {
   height: 500px;
+}
+.main-content .table thead th {
+  background: #3498db;
+  color: white;
+}
+.main-content .loader {
+  text-align: center;
 }
 @media (min-width: 992px) {
   .modal .modal-dialog.large {

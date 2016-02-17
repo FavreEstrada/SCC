@@ -135,7 +135,7 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 	function loadClients() {
 		$scope.isLoadingTable = true;
 		$scope.table.body = [];
-		var index ;
+		var index;
 		$http.get(Config.endpoints.getPaymentListCN.url).then(function(data) {
 			data.data.forEach(function(val, i) {
 				$scope.table.body.push({
@@ -162,7 +162,7 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 					isLoadingExpandedData: false,
 					expandedRow: []
 				});
-				index = (i+1);
+				index = (i + 1);
 			});
 			$scope.isLoadingTable = false;
 			loadCompanies(index);
@@ -172,6 +172,7 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 		});
 
 	}
+
 	function loadCompanies(lastIndex) {
 		$scope.isLoadingTable = true;
 		$http.get(Config.endpoints.getPaymentListCJ.url).then(function(data) {
@@ -259,8 +260,21 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 		}
 	};
 
+	function getUsers() {
+		$http.get(Config.endpoints.getUsers.url).then(function(data) {
+			$scope.users = [];
+			data.data.forEach(function(usr, ind) {
+				$scope.users.push(usr);
+			});
+			$scope.collector = data.data[0];
+		}, function(error) {
+			console.log("Error getting users: " + JSON.stringify(error));
+		});
+	}
+
 	function initialize() {
 		getPaymentStatus();
+		getUsers();
 	}
 
 	function formatDatetoMYSQLFormat(date_) {
@@ -280,7 +294,8 @@ angular.module('SCC').controller('listaCobro_ctrl', ["$scope", "$location", "$ht
 					amountPaid: parseFloat($scope.amountPaid).toFixed(2),
 					discount: $scope.discount,
 					numFact: $scope.numRecibo,
-					userID: Config.user.Id
+					userID: Config.user.Id,
+					collector: $scope.collector.userID
 				}
 			}).then(function(data) {
 				toaster.pop('success', "", "Pago de orden de cobro procesado correctamente");

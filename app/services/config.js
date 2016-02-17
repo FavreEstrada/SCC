@@ -8,6 +8,9 @@ angular.module('SCC').factory('Config', [function() {
             getAllNeighborhoods: {
                 url: base_url + "get_all_neighborhoods"
             },
+            getUsers: {
+                url: base_url + "get_users"
+            },
             //Create customer
             getNeighborhoods: {
                 url: base_url + "get_neighborhoods"
@@ -81,6 +84,18 @@ angular.module('SCC').factory('Config', [function() {
             },
             makePayment: {
                 url: base_url + "process_payment",
+                method: "POST"
+            },
+            //Reports
+            paymentReportCN: {
+                url: base_url + "get_payment_report_cn",
+            },
+            paymentReportCJ: {
+                url: base_url + "get_payment_report_cj",
+            },
+            //Dashboard
+            collectingReport: {
+                url: base_url + "collecting_report",
                 method: "POST"
             },
             //Login

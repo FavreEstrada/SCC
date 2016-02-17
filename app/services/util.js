@@ -17,6 +17,11 @@ angular.module('SCC').factory('Util', ["$filter", function($filter) {
         },
         formatDate: function(date) {
             return $filter('date')(date, 'dd-MM-yy');
+        },
+        getMonthYear: function(date){
+            var date_ = $filter('date')(date, 'M-yy');
+            var dashIndex = date_.indexOf("-");
+            return  this.getMonthName(date_.substr(0,dashIndex)) + date_.substr(dashIndex);
         }
     };
 }]);

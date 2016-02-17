@@ -14,12 +14,10 @@
 }
 .clientList-Cont .table-wrapper {
   margin-top: 15px;
-  height: 67vh;
+  height: 70vh;
   overflow-y: auto;
 }
 .clientList-Cont .table-wrapper .table thead th {
-  background: #337ab7;
-  color: white;
   font-weight: normal;
 }
 .clientList-Cont .modal .modal-content .modal-header .title-inline {

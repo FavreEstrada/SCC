@@ -60,10 +60,10 @@ angular.module('SCC').directive('detalleCliente', ["$http", "Config", "Util", "t
 							month_to_pay: Util.getMonthName(val.month_to_pay),
 							payment_status: val.payment_status,
 							income_status: val.income_status,
-							visit_date: val.visit_date,
-							paid_date: val.paid_date,
+							visit_date: Util.formatDate(val.visit_date),
+							paid_date: Util.formatDate(val.paid_date),
 							paid_amount: parseFloat(val.paid_amount).toFixed(2),
-							discount: parseFloat(val.discount).toFixed(2),
+							discount: val.discount ? parseFloat(val.discount).toFixed(2) : "",
 							total: parseFloat(val.total).toFixed(2)
 						});
 					});

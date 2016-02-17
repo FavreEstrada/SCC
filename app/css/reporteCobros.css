@@ -1,0 +1,11 @@
+.rep-cobros-cont .filters-wrapper {
+  margin-top: 25px;
+}
+.rep-cobros-cont .table-wrapper {
+  margin-top: 40px;
+  height: 67.4vh;
+  overflow-y: auto;
+}
+.rep-cobros-cont .table-wrapper .table thead th {
+  font-weight: normal;
+}

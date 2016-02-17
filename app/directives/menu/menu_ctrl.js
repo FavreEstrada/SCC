@@ -1,4 +1,4 @@
-angular.module('SCC').directive('menu', [ "$timeout", function($timeout) {
+angular.module('SCC').directive('menu', ["$timeout", function($timeout) {
 	return {
 		restrict: "E",
 		templateUrl: "app/directives/menu/Menu.html",
@@ -37,7 +37,7 @@ angular.module('SCC').directive('menu', [ "$timeout", function($timeout) {
 					}, {
 						name: "Órdenes de Cobro",
 						link: "#/reporteCobros",
-					},{
+					}, {
 						name: "Órdenes de Trabajo",
 						link: "#/reporteTrabajos",
 					}]

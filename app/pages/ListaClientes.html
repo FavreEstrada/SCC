@@ -37,7 +37,7 @@
         <tr  ng-repeat="(key,client) in table.body | orderBy:sort.column:sort.descending | filter: searchWord" ng-click="seeDetails(client)">
           <td ng-repeat=" data in client">{{data}}</td>
         </tr>
-        <tr ng-show="table.isLoading">
+        <tr ng-show="table.isLoading" class="loader">
           <td colspan="{{table.header.length}}">
             <csc-load-icon></csc-load-icon>
           </td>
