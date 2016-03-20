@@ -1,5 +1,13 @@
 .login-form-container {
   font-size: 16px;
+  margin-top: 20%;
+}
+.login-form-container .form-horizontal {
+  padding: 30px;
+  background: rgba(149, 165, 166, 0.3);
+}
+.login-form-container .form-horizontal .form-group:last-child {
+  margin-bottom: 0;
 }
 .login-form-container input {
   text-transform: none;
@@ -11,4 +19,7 @@
 }
 .login-form-container .form-control-feedback {
   right: 12px;
+}
+.main-content .content {
+  height: 93vh;
 }

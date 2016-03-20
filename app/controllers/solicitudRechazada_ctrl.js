@@ -1,4 +1,4 @@
-angular.module('SCC').controller('solicitudRechazada_ctrl', ["$scope", "$http", "Config", function($scope, $http, Config) {
+angular.module('SCC').controller('solicitudRechazada_ctrl', ["$scope", "$http", "Config", "$window", function($scope, $http, Config, $window) {
 
 	initialize();
 
@@ -11,7 +11,7 @@ angular.module('SCC').controller('solicitudRechazada_ctrl', ["$scope", "$http", 
 			$scope.neighborhoods = data.data;
 			$scope.neighbor = data.data[0];
 			$scope.getCover();
-			
+
 		}, function(error) {
 			console.log("Error getting all neighborhoods " + JSON.stringify(error));
 		});
@@ -20,7 +20,10 @@ angular.module('SCC').controller('solicitudRechazada_ctrl', ["$scope", "$http", 
 		$scope.isCovered = $scope.neighbor.covered === 0 ? "Si" : "No";
 	};
 
-	$scope.saveRequest = function (){
-		
+	$scope.saveRequest = function() {
+
+	};
+	$scope.onCancel = function() {
+		$window.history.back();
 	};
 }]);

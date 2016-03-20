@@ -27,6 +27,9 @@ angular.module('SCC', ['ngRoute', 'angular-md5', 'toaster'])
 			}).when('/dashboards', {
 				templateUrl: 'app/pages/dashboard.html',
 				controller: 'dashboard_ctrl'
+			}).when('/parametrizacion', {
+				templateUrl: 'app/pages/parametrizacion.html',
+				controller: 'parametrizacion_ctrl'
 			})
 			.otherwise({
 				redirectTo: '/login'

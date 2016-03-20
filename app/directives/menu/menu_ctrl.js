@@ -44,7 +44,7 @@ angular.module('SCC').directive('menu', ["$timeout", function($timeout) {
 				}, {
 					name: "Parametrización",
 					options: [],
-					link: "#/configuracion"
+					link: "#/parametrizacion"
 				}]
 			};
 			$timeout(function() {
