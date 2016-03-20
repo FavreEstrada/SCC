@@ -1,6 +1,6 @@
 angular.module('SCC').factory('Config', [function() {
 
-    var base_url = "http://localhost:3000/";
+    var base_url = "http://localhost:8080/";
 
     return {
         base_url: base_url,
@@ -96,6 +96,14 @@ angular.module('SCC').factory('Config', [function() {
             //Dashboard
             collectingReport: {
                 url: base_url + "collecting_report",
+                method: "POST"
+            },
+            collectingComparisonReport: {
+                url: base_url + "collecting_comparison_report",
+                method: "POST"
+            },
+            debtComparisonReport: {
+                url: base_url + "debt_comparison_report",
                 method: "POST"
             },
             //Login

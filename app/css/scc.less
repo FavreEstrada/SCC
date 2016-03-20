@@ -2,6 +2,22 @@
 @tableHeadColor: #3498db;
 @backgroundColor: #ecf0f1;
 
+/* Overriding Toast Colors*/
+.toast-success {
+    background-color: #2ecc71;
+}
+.toast-error {
+    background-color: #e74c3c;
+}
+.toast-info {
+    background-color: #2980b9;
+}
+.toast-wait {
+    background-color: #2980b9;
+}
+.toast-warning {
+    background-color: #e67e22;
+}
 .main-content {
     input, textarea {
         text-transform: capitalize;
@@ -24,7 +40,8 @@
         }
         .navbar {
             background-color: @backgroundColor;
-            a{
+
+            a {
                 color: black;
             }
             .dropdown {
@@ -40,6 +57,8 @@
         padding-left: calc(@padding + 5px);
         background: @backgroundColor;
         height: 86vh;
+        overflow: auto;
+
         form.create-client {
             > div {
                 margin: 10px 0 10px 0;
@@ -63,18 +82,17 @@
             height: 500px;
         }
     }
-
-    .table{
-        thead{
-            th{
+    .table {
+        thead {
+            th {
                 background: @tableHeadColor;
                 color: white;
             }
         }
     }
-     .loader{
-                text-align: center;
-            }
+    .loader {
+        text-align: center;
+    }
 }
 @media (min-width:992px) {
     .modal {
@@ -82,8 +100,7 @@
             &.large {
                 width: 1080px;
             }
-
-            &.wide{
+            &.wide {
                 width: 1200px;
             }
         }

@@ -1,16 +1,66 @@
+@backgroundColor: white;
 .dashboard-cont {
+	.loader {
+		position: absolute;
+		z-index: 1;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, 0.5);
+		height: 100%;
+
+		img {
+			position: absolute;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+		}
+	}
 	.graph-wrapper {
 		height: 100%;
-		margin-top: 25px;
+		margin-top: 8px;
 
 		> div {
-			height: 60%;
-			&.loader {
+			height: 50%;
+			margin-bottom: 20px;
+			&:nth-child(1) {
+				border-right: 1px solid #7f8c8d;
+			}
+		}
+		.wraper-bargraph{
+			background: @backgroundColor;
+			.filters-wrapper {
+				padding-top: 20px;
+			}
+			#bargraph {
+				height: 80%;
+			}
+		}
+		#bargraph, #bargraphComparisonMonth,#debtComparison,#debtCollectedComparison {
+			padding: 10px;
+			height: 100%;
+			background-color: @backgroundColor;
+
+			.no-data{
+				position: absolute;
+				top: 50%;
+				margin-left: 30%;
+				z-index: 2;
+			}
+		}
+		.debt-wrapper{
+			padding-right: 30px;
+		}
+		.dc-wrapper{
+			.select{
 				position: absolute;
 				z-index: 1;
-				left: 0;
-				right: 0;
+				padding-top: 20px;
 			}
+		}
+		.no-left-padding{
+			padding-left: 0;
 		}
 	}
 }

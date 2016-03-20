@@ -14,7 +14,7 @@
 }
 .clientList-Cont .table-wrapper {
   margin-top: 15px;
-  height: 70vh;
+  height: 64vh;
   overflow-y: auto;
 }
 .clientList-Cont .table-wrapper .table thead th {

@@ -114,8 +114,7 @@ angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", "
 		$scope.modalContent = $scope.table.metadata[customerIndex];
 		if ($scope.seeFilter === 1) {
 			$scope.modalTitle = client.first_name + " " + client.middle_name + " " + client.first_last + " " + client.second_last;
-		}
-		else{
+		} else {
 			$scope.modalTitle = client.company_name;
 		}
 		$("#clientDetail").modal('show');
@@ -124,6 +123,12 @@ angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", "
 	function initialize() {
 		$scope.seeBy();
 	}
+
+	$scope.getTableWidth = function() {
+		if ($scope.table.header) {
+			return Object.keys($scope.table.header).length;
+		}
+	};
 	$scope.seeBy = function() {
 		if ($scope.seeFilter === 1) {
 			getCNCustomers();

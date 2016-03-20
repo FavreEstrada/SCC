@@ -38,7 +38,7 @@
           <td ng-repeat=" data in client">{{data}}</td>
         </tr>
         <tr ng-show="table.isLoading" class="loader">
-          <td colspan="{{table.header.length}}">
+          <td colspan="{{getTableWidth()}}">
             <csc-load-icon></csc-load-icon>
           </td>
         </tr>

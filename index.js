@@ -10,8 +10,9 @@ var db = {
 	database: "sccdb",
 	charset: "latin1_swedish_ci",
 	timezone: "0700",
-	debug: true
+	// debug: true
 };
+
 var connection = mysql.createConnection(db);
 connection.connect(function(err) {
 	if (!err) {
@@ -28,6 +29,8 @@ app.all('/*', function(req, res, next) {
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 	next();
 });
+
+
 
 app.get('/testEndpoint', function(req, res) {
 	return res.json("Server Alive");
@@ -476,7 +479,7 @@ app.post('/collecting_report', function(req, res) {
 			if (!err) {
 				var obj = {}
 				var results = rows;
-				if (period === 1) {
+				if (period === 1 || period === 2) {
 					results.forEach(function(val, ind) {
 						var valDate = val.Fecha_Pagada.split("-");
 						var objAttr = valDate[1] + "-" + valDate[0];
@@ -487,16 +490,6 @@ app.post('/collecting_report', function(req, res) {
 						}
 					});
 
-				} else if (period === 2) {
-					results.forEach(function(val, ind) {
-						var valDate = val.Fecha_Pagada.split("-");
-						var objAttr = valDate[0];
-						if (obj.hasOwnProperty(objAttr)) {
-							obj[objAttr] = obj[objAttr] + val.total;
-						} else {
-							obj[objAttr] = val.total;
-						}
-					});
 				} else {
 					results.forEach(function(val, ind) {
 						var valDate = val.Fecha_Pagada.split("-");
@@ -518,6 +511,79 @@ app.post('/collecting_report', function(req, res) {
 	} else {
 		return res.status(500).send('MIssing parameters :  period');
 	}
+});
+app.get('/collecting_comparison_report', function(req, res) {
+
+	var query = "SELECT Month(oc.Fecha_Pagada) AS month,Year(oc.Fecha_Pagada) AS year, SUM(CantidadPagada) AS total FROM sccdb.orden_cobro oc WHERE Fecha_Pagada IS NOT NULL AND Fecha_Pagada BETWEEN DATE_FORMAT(CURRENT_DATE() ,'%Y-%m-01') AND last_day(CURRENT_DATE()) OR Fecha_Pagada BETWEEN  DATE_SUB(DATE_FORMAT(CURRENT_DATE() ,'%Y-%m-01'), INTERVAL 1 YEAR) AND DATE_SUB(last_day(CURRENT_DATE()), INTERVAL 1 YEAR) GROUP BY Month(oc.Fecha_Pagada),Year(oc.Fecha_Pagada)";
+	var date_ = new Date();
+
+	connection.query(query, function(err, rows, fields) {
+		if (!err) {
+			var obj = {}
+			var results = rows;
+
+			results.forEach(function(val, ind) {
+				var objAttr = val.month + "-" + val.year;
+				if (obj.hasOwnProperty(objAttr)) {
+					obj[objAttr] = obj[objAttr] + val.total;
+				} else {
+					obj[objAttr] = val.total;
+				}
+			});
+			return res.json(obj);
+		} else {
+			return res.status(500).send("Error in collecting_comparison_report " + JSON.stringify(err));
+		}
+
+
+	});
+});
+
+app.get('/debt_comparison_report', function(req, res) {
+	//Debt
+	var query = "SELECT SUM(CantidadPagar)AS debt, Abreviacion AS neighbor FROM sccdb.orden_cobro oc JOIN contrato c ON oc.CONTRATO_IDContrato = c.IDContrato JOIN barriocolonia bar ON c.IDBarrioColonia = bar.IDBarrioColonia WHERE Fecha_Pagada IS NULL AND oc.Fecha <= CURRENT_DATE() GROUP BY neighbor";
+
+	connection.query(query, function(err, rows, fields) {
+		if (!err) {
+			var obj = {}
+			var totalDebt = 0,
+				totalCollected = 0;
+			rows.forEach(function(val, ind) {
+				obj[val.neighbor] = {
+					debt: parseFloat(val.debt),
+					collected: parseFloat(0)
+				};
+				totalDebt = totalDebt + val.debt;
+			});
+
+			//Collected
+			query = "SELECT SUM(CantidadPagar)AS collected, Abreviacion AS neighbor FROM sccdb.orden_cobro oc JOIN contrato c ON oc.CONTRATO_IDContrato = c.IDContrato JOIN barriocolonia bar ON c.IDBarrioColonia = bar.IDBarrioColonia WHERE Fecha_Pagada IS NOT NULL AND oc.Fecha <= CURRENT_DATE() GROUP BY neighbor";
+			connection.query(query, function(err_, rows_, fields_) {
+				if (!err_) {
+					rows_.forEach(function(val, ind) {
+						if (obj.hasOwnProperty(val.neighbor)) {
+							obj[val.neighbor].collected = parseFloat(val.collected);
+						} else {
+							obj[val.neighbor] = {
+								debt: parseFloat(0),
+								collected: parseFloat(val.collected)
+							};
+						}
+						totalCollected = totalCollected + val.collected;
+					});
+					obj.total = {
+						debt: parseFloat(totalDebt),
+						collected: parseFloat(totalCollected)
+					};
+				}
+				return res.json(obj);
+			});
+		} else {
+			return res.status(500).send("Error in debt_report " + JSON.stringify(err));
+		}
+
+
+	});
 });
 
 //LOGIN
@@ -549,6 +615,8 @@ app.post('/authentication', function(req, res) {
 	}
 });
 
-http.listen(3000, function() {
-	console.log('Listening on port 3000');
+app.use(express.static(__dirname));
+
+http.listen(8080, function() {
+	console.log('Listening on port 8080');
 });

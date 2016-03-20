@@ -1,13 +1,64 @@
-.dashboard-cont .graph-wrapper {
-  height: 100%;
-  margin-top: 25px;
-}
-.dashboard-cont .graph-wrapper > div {
-  height: 60%;
-}
-.dashboard-cont .graph-wrapper > div.loader {
+.dashboard-cont .loader {
   position: absolute;
   z-index: 1;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+}
+.dashboard-cont .loader img {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+}
+.dashboard-cont .graph-wrapper {
+  height: 100%;
+  margin-top: 8px;
+}
+.dashboard-cont .graph-wrapper > div {
+  height: 50%;
+  margin-bottom: 20px;
+}
+.dashboard-cont .graph-wrapper > div:nth-child(1) {
+  border-right: 1px solid #7f8c8d;
+}
+.dashboard-cont .graph-wrapper .wraper-bargraph {
+  background: white;
+}
+.dashboard-cont .graph-wrapper .wraper-bargraph .filters-wrapper {
+  padding-top: 20px;
+}
+.dashboard-cont .graph-wrapper .wraper-bargraph #bargraph {
+  height: 80%;
+}
+.dashboard-cont .graph-wrapper #bargraph,
+.dashboard-cont .graph-wrapper #bargraphComparisonMonth,
+.dashboard-cont .graph-wrapper #debtComparison,
+.dashboard-cont .graph-wrapper #debtCollectedComparison {
+  padding: 10px;
+  height: 100%;
+  background-color: white;
+}
+.dashboard-cont .graph-wrapper #bargraph .no-data,
+.dashboard-cont .graph-wrapper #bargraphComparisonMonth .no-data,
+.dashboard-cont .graph-wrapper #debtComparison .no-data,
+.dashboard-cont .graph-wrapper #debtCollectedComparison .no-data {
+  position: absolute;
+  top: 50%;
+  margin-left: 30%;
+  z-index: 2;
+}
+.dashboard-cont .graph-wrapper .debt-wrapper {
+  padding-right: 30px;
+}
+.dashboard-cont .graph-wrapper .dc-wrapper .select {
+  position: absolute;
+  z-index: 1;
+  padding-top: 20px;
+}
+.dashboard-cont .graph-wrapper .no-left-padding {
+  padding-left: 0;
 }

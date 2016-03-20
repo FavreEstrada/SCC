@@ -1,15 +1,34 @@
 <div class="col-lg-12 col-md-12 col-sm-12 dashboard-cont">
 	<h4>Gráficos</h4>
-	<div class="filters-wrapper col-lg-12 col-md-12 col-sm-12">
-		<div class="col-lg-4 col-md-4 col-sm-4 form-inline">
-			<label>Periocidad:</label>
-			<select class="form-control"  ng-model="period" ng-options="option as option.value for option in filters track by option.id" ng-change="update()"></select>
+	<div class="graph-wrapper col-lg-12 col-md-12 col-sm-12" >
+		<div class="col-lg-7 col-md-7 col-sm-7 wraper-bargraph">
+			<div class="filters-wrapper col-lg-12 col-md-12 col-sm-12">
+				<div class="col-lg-4 col-md-4 col-sm-4 form-inline">
+					<label>Periocidad:</label>
+					<select class="form-control"  ng-model="period" ng-options="option as option.value for option in filters track by option.id" ng-change="update()"></select>
+				</div>
+			</div>
+			<div class="col-lg-10 col-md-10 col-sm-10" id="bargraph">
+				<span ng-if="!chartObject.incomeChart.data" class="no-data">No hay Datos</span>
+			</div>
+		</div>
+		<div class="col-lg-5 col-md-5 col-sm-5 no-left-padding">
+			<div class="col-lg-offset-3 col-md-offset-3  col-sm-offset-3 " id="bargraphComparisonMonth">
+				<span ng-if="!chartObject.incomeComparison.data" class="no-data">No hay Datos</span>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 debt-wrapper">
+			<div class="col-lg-12 col-md-12 col-sm-12 " id="debtComparison"></div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 dc-wrapper">
+			<div class="col-lg-4 col-md-4 col-sm-4 select form-inline">
+				<label>Barrio/Colonia</label>
+				<select class="form-control"  ng-model="neighbor" ng-options="option as option.abbr for option in neighbors track by option.id" ng-change="updateDebtCollectedChart()"></select>
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 " id="debtCollectedComparison"></div>
 		</div>
 	</div>
-	<div class="graph-wrapper col-lg-12 col-md-12 col-sm-12" >
-		<div ng-if="isLoading" class="loader">
-			<csc-load-icon></csc-load-icon>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6" id="bargraph"></div>
+	<div ng-if="isLoading" class="loader">
+		<csc-load-icon></csc-load-icon>
 	</div>
 </div>

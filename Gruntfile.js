@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   require('time-grunt')(grunt);
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     pkg: '<json:package.json>',
@@ -43,8 +44,6 @@ module.exports = function(grunt) {
         dest: 'appCSS.css'
       }
     },
-
-
     uglify: {
       options: {
         compress: {
@@ -80,9 +79,7 @@ module.exports = function(grunt) {
     },
     watch: {
       options: {
-        livereload: false,
-        spawn: false,
-        debounceDelay: 150
+        // spawn: false,
       },
       js: {
         files: ['app/{,**/}*.js'],
@@ -110,6 +107,19 @@ module.exports = function(grunt) {
         files: ['app/**/*.html', 'index.html']
       }
     },
+    run: {
+      integration_server: {
+        args: [
+          'index.js'
+        ]
+      }
+    },
+    concurrent: {
+      start: ['generate', 'watch', 'run:integration_server'],
+      options: {
+                logConcurrentOutput: true
+            }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -117,9 +127,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-run');
+
 
   grunt.registerTask("generate", ['jshint', 'concat:js', 'less', 'concat:css']);
-  grunt.registerTask('livereload', ['generate', 'watch']);
+  grunt.registerTask('livereload', 'concurrent:start');
   grunt.registerTask('gitpush', 'jshint');
   grunt.registerTask('deploy', ['jshint', 'concat']);
   grunt.registerTask('deployprod', ['jshint', 'concat', 'uglify']);

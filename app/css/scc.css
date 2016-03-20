@@ -1,3 +1,19 @@
+/* Overriding Toast Colors*/
+.toast-success {
+  background-color: #2ecc71;
+}
+.toast-error {
+  background-color: #e74c3c;
+}
+.toast-info {
+  background-color: #2980b9;
+}
+.toast-wait {
+  background-color: #2980b9;
+}
+.toast-warning {
+  background-color: #e67e22;
+}
 .main-content input,
 .main-content textarea {
   text-transform: capitalize;
@@ -31,6 +47,7 @@
   padding-left: calc(25px);
   background: #ecf0f1;
   height: 86vh;
+  overflow: auto;
 }
 .main-content .content form.create-client > div {
   margin: 10px 0 10px 0;
