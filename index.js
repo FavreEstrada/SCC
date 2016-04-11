@@ -38,7 +38,7 @@ app.get('/testEndpoint', function(req, res) {
 
 // GENERAL 
 app.get('/get_all_neighborhoods', function(req, res) {
-	var query = "SELECT IDBarriocolonia as id, Nombre as name, Abreviacion as abbr, Cobertura as covered, Observacion as Obs FROM  barriocolonia ORDER BY name";
+	var query = "SELECT IDBarriocolonia as id, Nombre as name, Abreviacion as abbr, Cobertura as covered, Observacion as Obs, Estado as status FROM  barriocolonia ORDER BY name";
 	connection.query(query, function(err, rows, fields) {
 		if (!err) {
 			return res.json(rows);

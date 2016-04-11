@@ -91,20 +91,11 @@ module.exports = function(grunt) {
         ],
         tasks: ['concat:css']
       },
-      sass: {
-        files: [
-          'app/css/{,*}*.scss', 'app/directives/{,*/}*.scss'
-        ],
-        tasks: ['sass', 'concat:css']
-      },
       less: {
         files: [
           'app/css/{,*}*.less', 'app/directives/{,*/}*.less', 'app/login.less'
         ],
         tasks: ['less', 'concat:css']
-      },
-      html: {
-        files: ['app/**/*.html', 'index.html']
       }
     },
     run: {

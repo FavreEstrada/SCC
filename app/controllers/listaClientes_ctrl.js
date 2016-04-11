@@ -3,7 +3,7 @@ angular.module('SCC').controller('listaClientes_ctrl', ["$scope", "$location", "
 	$scope.columnSort = "ID";
 	$scope.reverseSort = false;
 	$scope.seeFilter = 1;
-
+	
 	$scope.table = {
 		header: {},
 		body: [],

@@ -17,4 +17,5 @@ angular.module('SCC').controller('index_ctrl', ["$scope", "$location", "$window"
 		}, 0);
 		$rootScope.noInternet = true;
 	}
+	
 }]);

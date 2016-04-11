@@ -2,6 +2,9 @@
   list-style: none;
   font-size: 1em;
 }
+.param-menu .menu-list .list-item.active {
+  background: #3498db;
+}
 .param-menu .menu-list .list-item:first-child {
   font-weight: bold;
   font-size: 1.1em;
@@ -9,4 +12,8 @@
 .param-menu .menu-list .list-item + .list-item:hover {
   background: #3498db;
   color: white;
+}
+.param-content .table-wrapper {
+  height: 90%;
+  overflow: auto;
 }
